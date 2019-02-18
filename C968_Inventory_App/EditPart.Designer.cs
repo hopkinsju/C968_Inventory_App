@@ -44,7 +44,13 @@
             this.PartMaxCountInput = new System.Windows.Forms.TextBox();
             this.PartSourceIDInput = new System.Windows.Forms.TextBox();
             this.PartSourceLabel = new System.Windows.Forms.Label();
+            this.PartSaveButton = new System.Windows.Forms.Button();
+            this.PartCancelButton = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.PartInHouseRadio = new System.Windows.Forms.RadioButton();
+            this.PartOutsourcedRadio = new System.Windows.Forms.RadioButton();
             this.PartLayoutPanel.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // EditPartLabel
@@ -226,18 +232,76 @@
             this.PartSourceLabel.TabIndex = 33;
             this.PartSourceLabel.Text = "SourceID";
             // 
+            // PartSaveButton
+            // 
+            this.PartSaveButton.AutoSize = true;
+            this.PartSaveButton.Location = new System.Drawing.Point(261, 407);
+            this.PartSaveButton.Name = "PartSaveButton";
+            this.PartSaveButton.Size = new System.Drawing.Size(75, 31);
+            this.PartSaveButton.TabIndex = 7;
+            this.PartSaveButton.Text = "Save";
+            this.PartSaveButton.UseVisualStyleBackColor = true;
+            // 
+            // PartCancelButton
+            // 
+            this.PartCancelButton.AutoSize = true;
+            this.PartCancelButton.Location = new System.Drawing.Point(342, 407);
+            this.PartCancelButton.Name = "PartCancelButton";
+            this.PartCancelButton.Size = new System.Drawing.Size(75, 31);
+            this.PartCancelButton.TabIndex = 8;
+            this.PartCancelButton.Text = "Cancel";
+            this.PartCancelButton.UseVisualStyleBackColor = true;
+            this.PartCancelButton.Click += new System.EventHandler(this.PartCancelButton_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.PartOutsourcedRadio);
+            this.panel1.Controls.Add(this.PartInHouseRadio);
+            this.panel1.Location = new System.Drawing.Point(201, 26);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(216, 25);
+            this.panel1.TabIndex = 9;
+            // 
+            // PartInHouseRadio
+            // 
+            this.PartInHouseRadio.AutoSize = true;
+            this.PartInHouseRadio.Checked = true;
+            this.PartInHouseRadio.Location = new System.Drawing.Point(29, 3);
+            this.PartInHouseRadio.Name = "PartInHouseRadio";
+            this.PartInHouseRadio.Size = new System.Drawing.Size(68, 17);
+            this.PartInHouseRadio.TabIndex = 0;
+            this.PartInHouseRadio.TabStop = true;
+            this.PartInHouseRadio.Text = "In-House";
+            this.PartInHouseRadio.UseVisualStyleBackColor = true;
+            // 
+            // PartOutsourcedRadio
+            // 
+            this.PartOutsourcedRadio.AutoSize = true;
+            this.PartOutsourcedRadio.Location = new System.Drawing.Point(132, 3);
+            this.PartOutsourcedRadio.Name = "PartOutsourcedRadio";
+            this.PartOutsourcedRadio.Size = new System.Drawing.Size(80, 17);
+            this.PartOutsourcedRadio.TabIndex = 1;
+            this.PartOutsourcedRadio.TabStop = true;
+            this.PartOutsourcedRadio.Text = "Outsourced";
+            this.PartOutsourcedRadio.UseVisualStyleBackColor = true;
+            // 
             // EditPart
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.ClientSize = new System.Drawing.Size(464, 468);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.PartSaveButton);
+            this.Controls.Add(this.PartCancelButton);
             this.Controls.Add(this.PartLayoutPanel);
             this.Controls.Add(this.EditPartLabel);
             this.Name = "EditPart";
             this.Text = "EditPart";
             this.PartLayoutPanel.ResumeLayout(false);
             this.PartLayoutPanel.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -261,5 +325,10 @@
         private System.Windows.Forms.TextBox PartMaxCountInput;
         private System.Windows.Forms.TextBox PartSourceIDInput;
         private System.Windows.Forms.Label PartSourceLabel;
+        private System.Windows.Forms.Button PartSaveButton;
+        private System.Windows.Forms.Button PartCancelButton;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.RadioButton PartOutsourcedRadio;
+        private System.Windows.Forms.RadioButton PartInHouseRadio;
     }
 }

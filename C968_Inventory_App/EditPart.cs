@@ -22,5 +22,10 @@ namespace C968_Inventory_App
             InitializeComponent();
             this.EditPartLabel.Text = "Add Part";
         }
+
+        private void PartCancelButton_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+        }       
     }
 }
