@@ -46,14 +46,45 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="EditPart.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="EditPart.Designer.cs">
+      <DependentUpon>EditPart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Part.cs" />
+    <Compile Include="CustomControls\PageLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CustomControls\PageLabel.Designer.cs">
+      <DependentUpon>PageLabel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainScreenForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainScreenForm.Designer.cs">
+      <DependentUpon>MainScreenForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ParentWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ParentWindow.Designer.cs">
+      <DependentUpon>ParentWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="CustomControls\PageLabel.resx">
+      <DependentUpon>PageLabel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditPart.resx">
+      <DependentUpon>EditPart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainScreenForm.resx">
+      <DependentUpon>MainScreenForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ParentWindow.resx">
+      <DependentUpon>ParentWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -63,6 +94,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="Properties\DataSources\Part.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

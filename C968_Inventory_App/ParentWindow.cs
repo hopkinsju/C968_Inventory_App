@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace C968_Inventory_App
 {
-    public partial class Form1 : Form
+    public partial class ParentWindow : Form
     {
-        public Form1()
+        public ParentWindow()
         {
             InitializeComponent();
+            var main = new MainScreenForm();
+            main.MdiParent = this;
+            main.Show();
         }
+
     }
+
 }
