@@ -24,9 +24,16 @@ namespace C968_Inventory_App
 
         private void AddPartButton_Click(object sender, EventArgs e)
         {
-            var partForm = new EditPart();
+            var partForm = new ItemDetailForm();
             partForm.MdiParent = this.MdiParent;
             partForm.Show();
+        }
+
+        private void AddProductButton_Click(object sender, EventArgs e)
+        {
+            var productForm = new EditProduct();
+            productForm.MdiParent = this.MdiParent;
+            productForm.Show();
         }
     }
 }

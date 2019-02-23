@@ -1,6 +1,6 @@
 ﻿namespace C968_Inventory_App
 {
-    partial class ParentWindow
+    partial class ChildForm
     {
         /// <summary>
         /// Required designer variable.
@@ -30,15 +30,13 @@
         {
             this.SuspendLayout();
             // 
-            // ParentWindow
+            // ChildForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1190, 622);
-            this.IsMdiContainer = true;
-            this.Name = "ParentWindow";
-            this.Text = "C968 Inventory App";
+            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Name = "ChildForm";
+            this.Text = "ChildForm";
             this.ResumeLayout(false);
 
         }
@@ -46,4 +44,3 @@
         #endregion
     }
 }
-

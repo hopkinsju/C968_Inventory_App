@@ -169,6 +169,7 @@
             this.AddProductButton.TabIndex = 5;
             this.AddProductButton.Text = "Add";
             this.AddProductButton.UseVisualStyleBackColor = true;
+            this.AddProductButton.Click += new System.EventHandler(this.AddProductButton_Click);
             // 
             // ModifyProductButton
             // 
@@ -219,16 +220,19 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSize = true;
             this.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.ClientSize = new System.Drawing.Size(1208, 642);
+            this.ClientSize = new System.Drawing.Size(1206, 640);
             this.ControlBox = false;
             this.Controls.Add(this.ProductsGroupBox);
             this.Controls.Add(this.PartsGroupBox);
             this.Controls.Add(this.exitButton);
             this.Controls.Add(this.pageLabel1);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.MaximizeBox = false;
             this.Name = "MainScreenForm";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.Text = "MainScreen";
             this.PartsGroupBox.ResumeLayout(false);
             this.PartsGroupBox.PerformLayout();

@@ -46,11 +46,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EditPart.cs">
+    <Compile Include="ItemDetailForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EditPart.Designer.cs">
-      <DependentUpon>EditPart.cs</DependentUpon>
+    <Compile Include="ItemDetailForm.Designer.cs">
+      <DependentUpon>ItemDetailForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EditProduct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditProduct.Designer.cs">
+      <DependentUpon>EditProduct.cs</DependentUpon>
     </Compile>
     <Compile Include="Part.cs" />
     <Compile Include="CustomControls\PageLabel.cs">
@@ -76,8 +82,11 @@
     <EmbeddedResource Include="CustomControls\PageLabel.resx">
       <DependentUpon>PageLabel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EditPart.resx">
-      <DependentUpon>EditPart.cs</DependentUpon>
+    <EmbeddedResource Include="ItemDetailForm.resx">
+      <DependentUpon>ItemDetailForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditProduct.resx">
+      <DependentUpon>EditProduct.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainScreenForm.resx">
       <DependentUpon>MainScreenForm.cs</DependentUpon>
