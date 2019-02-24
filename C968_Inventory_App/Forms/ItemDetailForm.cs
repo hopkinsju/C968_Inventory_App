@@ -31,8 +31,8 @@ namespace C968_Inventory_App
 
         private void EditPartForm_change(object sender, EventArgs e)
         {
-            this.CancelButton.Location = new System.Drawing.Point(Width - 130, Height - 120);
-            this.SaveButton.Location = new System.Drawing.Point(CancelButton.Left - SaveButton.Width - 20, CancelButton.Top);
+            this.FormCancelButton.Location = new System.Drawing.Point(Width - 130, Height - 120);
+            this.SaveButton.Location = new System.Drawing.Point(FormCancelButton.Left - SaveButton.Width - 20, FormCancelButton.Top);
         }
 
 

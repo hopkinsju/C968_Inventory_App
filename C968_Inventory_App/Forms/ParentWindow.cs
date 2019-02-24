@@ -15,8 +15,10 @@ namespace C968_Inventory_App
         public ParentWindow()
         {
             InitializeComponent();
-            var main = new MainScreenForm();
-            main.MdiParent = this;
+            var main = new MainScreenForm
+            {
+                MdiParent = this
+            };
             main.Show();
         }
 

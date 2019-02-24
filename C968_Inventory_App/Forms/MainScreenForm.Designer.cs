@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pageLabel1 = new C968_Inventory_App.CustomControls.PageLabel();
             this.exitButton = new System.Windows.Forms.Button();
             this.PartsGroupBox = new System.Windows.Forms.GroupBox();
             this.AddPartButton = new System.Windows.Forms.Button();
@@ -44,23 +43,15 @@
             this.ProductsDataGrid = new System.Windows.Forms.DataGridView();
             this.ProductSearchInput = new System.Windows.Forms.TextBox();
             this.ProductSearchButton = new System.Windows.Forms.Button();
+            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.inStockDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.priceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pageLabel1 = new C968_Inventory_App.CustomControls.PageLabel();
             this.PartsGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PartsDataGrid)).BeginInit();
             this.ProductsGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ProductsDataGrid)).BeginInit();
             this.SuspendLayout();
-            // 
-            // pageLabel1
-            // 
-            this.pageLabel1.AutoSize = true;
-            this.pageLabel1.BackColor = System.Drawing.Color.Transparent;
-            this.pageLabel1.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.pageLabel1.ForeColor = System.Drawing.SystemColors.InfoText;
-            this.pageLabel1.Location = new System.Drawing.Point(26, 26);
-            this.pageLabel1.Name = "pageLabel1";
-            this.pageLabel1.Size = new System.Drawing.Size(283, 25);
-            this.pageLabel1.TabIndex = 0;
-            this.pageLabel1.Text = "Inventory Management System";
             // 
             // exitButton
             // 
@@ -121,9 +112,13 @@
             // 
             // PartsDataGrid
             // 
+            this.PartsDataGrid.AllowUserToAddRows = false;
+            this.PartsDataGrid.AllowUserToDeleteRows = false;
+            this.PartsDataGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.PartsDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.PartsDataGrid.Location = new System.Drawing.Point(18, 106);
             this.PartsDataGrid.Name = "PartsDataGrid";
+            this.PartsDataGrid.ReadOnly = true;
             this.PartsDataGrid.Size = new System.Drawing.Size(534, 262);
             this.PartsDataGrid.TabIndex = 2;
             // 
@@ -193,6 +188,7 @@
             // 
             // ProductsDataGrid
             // 
+            this.ProductsDataGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.ProductsDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ProductsDataGrid.Location = new System.Drawing.Point(18, 106);
             this.ProductsDataGrid.Name = "ProductsDataGrid";
@@ -216,6 +212,39 @@
             this.ProductSearchButton.Text = "Search";
             this.ProductSearchButton.UseVisualStyleBackColor = true;
             // 
+            // nameDataGridViewTextBoxColumn
+            // 
+            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+            this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
+            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+            this.nameDataGridViewTextBoxColumn.Width = 82;
+            // 
+            // inStockDataGridViewTextBoxColumn
+            // 
+            this.inStockDataGridViewTextBoxColumn.DataPropertyName = "InStock";
+            this.inStockDataGridViewTextBoxColumn.HeaderText = "InStock";
+            this.inStockDataGridViewTextBoxColumn.Name = "inStockDataGridViewTextBoxColumn";
+            this.inStockDataGridViewTextBoxColumn.Width = 81;
+            // 
+            // priceDataGridViewTextBoxColumn
+            // 
+            this.priceDataGridViewTextBoxColumn.DataPropertyName = "Price";
+            this.priceDataGridViewTextBoxColumn.HeaderText = "Price";
+            this.priceDataGridViewTextBoxColumn.Name = "priceDataGridViewTextBoxColumn";
+            this.priceDataGridViewTextBoxColumn.Width = 82;
+            // 
+            // pageLabel1
+            // 
+            this.pageLabel1.AutoSize = true;
+            this.pageLabel1.BackColor = System.Drawing.Color.Transparent;
+            this.pageLabel1.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pageLabel1.ForeColor = System.Drawing.SystemColors.InfoText;
+            this.pageLabel1.Location = new System.Drawing.Point(26, 26);
+            this.pageLabel1.Name = "pageLabel1";
+            this.pageLabel1.Size = new System.Drawing.Size(283, 25);
+            this.pageLabel1.TabIndex = 0;
+            this.pageLabel1.Text = "Inventory Management System";
+            // 
             // MainScreenForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -234,6 +263,7 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "MainScreen";
+            this.Load += new System.EventHandler(this.MainScreenForm_Load);
             this.PartsGroupBox.ResumeLayout(false);
             this.PartsGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PartsDataGrid)).EndInit();
@@ -263,5 +293,8 @@
         private System.Windows.Forms.DataGridView ProductsDataGrid;
         private System.Windows.Forms.TextBox ProductSearchInput;
         private System.Windows.Forms.Button ProductSearchButton;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn inStockDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn priceDataGridViewTextBoxColumn;
     }
 }

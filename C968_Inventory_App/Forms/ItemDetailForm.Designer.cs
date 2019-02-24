@@ -44,7 +44,7 @@
             this.SourceIDInput = new System.Windows.Forms.TextBox();
             this.SourceLabel = new System.Windows.Forms.Label();
             this.SaveButton = new System.Windows.Forms.Button();
-            this.CancelButton = new System.Windows.Forms.Button();
+            this.FormCancelButton = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.OutsourcedRadio = new System.Windows.Forms.RadioButton();
             this.InHouseRadio = new System.Windows.Forms.RadioButton();
@@ -231,18 +231,18 @@
             this.SaveButton.Text = "Save";
             this.SaveButton.UseVisualStyleBackColor = true;
             // 
-            // CancelButton
+            // FormCancelButton
             // 
-            this.CancelButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.CancelButton.AutoSize = true;
-            this.CancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.CancelButton.Location = new System.Drawing.Point(346, 415);
-            this.CancelButton.Name = "CancelButton";
-            this.CancelButton.Size = new System.Drawing.Size(75, 31);
-            this.CancelButton.TabIndex = 8;
-            this.CancelButton.Text = "Cancel";
-            this.CancelButton.UseVisualStyleBackColor = true;
-            this.CancelButton.Click += new System.EventHandler(this.PartCancelButton_Click);
+            this.FormCancelButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.FormCancelButton.AutoSize = true;
+            this.FormCancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.FormCancelButton.Location = new System.Drawing.Point(346, 415);
+            this.FormCancelButton.Name = "FormCancelButton";
+            this.FormCancelButton.Size = new System.Drawing.Size(75, 31);
+            this.FormCancelButton.TabIndex = 8;
+            this.FormCancelButton.Text = "Cancel";
+            this.FormCancelButton.UseVisualStyleBackColor = true;
+            this.FormCancelButton.Click += new System.EventHandler(this.PartCancelButton_Click);
             // 
             // panel1
             // 
@@ -297,7 +297,7 @@
             this.ClientSize = new System.Drawing.Size(469, 485);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.SaveButton);
-            this.Controls.Add(this.CancelButton);
+            this.Controls.Add(this.FormCancelButton);
             this.Controls.Add(this.LayoutPanel);
             this.Controls.Add(this.EditPageLabel);
             this.Name = "ItemDetailForm";
@@ -333,7 +333,7 @@
         private System.Windows.Forms.TextBox SourceIDInput;
         private System.Windows.Forms.Label SourceLabel;
         private System.Windows.Forms.Button SaveButton;
-        private System.Windows.Forms.Button CancelButton;
+        private System.Windows.Forms.Button FormCancelButton;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.RadioButton OutsourcedRadio;
         private System.Windows.Forms.RadioButton InHouseRadio;

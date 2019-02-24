@@ -46,52 +46,56 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ItemDetailForm.cs">
+    <Compile Include="Classes\Inhouse.cs" />
+    <Compile Include="Classes\Inventory.cs" />
+    <Compile Include="Forms\ItemDetailForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ItemDetailForm.Designer.cs">
+    <Compile Include="Forms\ItemDetailForm.Designer.cs">
       <DependentUpon>ItemDetailForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="EditProduct.cs">
+    <Compile Include="Forms\EditProduct.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EditProduct.Designer.cs">
+    <Compile Include="Forms\EditProduct.Designer.cs">
       <DependentUpon>EditProduct.cs</DependentUpon>
     </Compile>
-    <Compile Include="Part.cs" />
+    <Compile Include="Classes\Outsourced.cs" />
+    <Compile Include="Classes\Part.cs" />
     <Compile Include="CustomControls\PageLabel.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="CustomControls\PageLabel.Designer.cs">
       <DependentUpon>PageLabel.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainScreenForm.cs">
+    <Compile Include="Forms\MainScreenForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainScreenForm.Designer.cs">
+    <Compile Include="Forms\MainScreenForm.Designer.cs">
       <DependentUpon>MainScreenForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ParentWindow.cs">
+    <Compile Include="Forms\ParentWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ParentWindow.Designer.cs">
+    <Compile Include="Forms\ParentWindow.Designer.cs">
       <DependentUpon>ParentWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="Classes\Product.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="CustomControls\PageLabel.resx">
       <DependentUpon>PageLabel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ItemDetailForm.resx">
+    <EmbeddedResource Include="Forms\ItemDetailForm.resx">
       <DependentUpon>ItemDetailForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EditProduct.resx">
+    <EmbeddedResource Include="Forms\EditProduct.resx">
       <DependentUpon>EditProduct.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainScreenForm.resx">
+    <EmbeddedResource Include="Forms\MainScreenForm.resx">
       <DependentUpon>MainScreenForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ParentWindow.resx">
+    <EmbeddedResource Include="Forms\ParentWindow.resx">
       <DependentUpon>ParentWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -103,6 +107,10 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="Properties\DataSources\Inhouse.datasource" />
+    <None Include="Properties\DataSources\Inventory.datasource" />
+    <None Include="Properties\DataSources\ItemDetailForm.datasource" />
+    <None Include="Properties\DataSources\Outsourced.datasource" />
     <None Include="Properties\DataSources\Part.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

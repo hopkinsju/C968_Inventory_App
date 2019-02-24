@@ -1,6 +1,6 @@
 ﻿namespace C968_Inventory_App
 {
-    partial class EditProduct
+    partial class ParentWindow
     {
         /// <summary>
         /// Required designer variable.
@@ -30,18 +30,20 @@
         {
             this.SuspendLayout();
             // 
-            // EditProduct
+            // ParentWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1007, 486);
-            this.Name = "EditProduct";
-            this.Text = "EditProduct";
+            this.AutoSize = true;
+            this.ClientSize = new System.Drawing.Size(1266, 676);
+            this.IsMdiContainer = true;
+            this.Name = "ParentWindow";
+            this.Text = "C968 Inventory App";
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
     }
 }
+
