@@ -3,26 +3,72 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace C968_Inventory_App
 {
-    class Product
+    class Product : INotifyPropertyChanged
     {
         private ArrayList associatedParts;
         private int productID;
         public int ProductID { get; }
         private string name;
-        public string Name { get; set; }
+        public string Name {
+            get
+            {
+                return name;
+            }
+            set
+            {
+                SetName(value);
+            }
+        }
         private double price;
-        public double Price { get; set; }
+        public double Price {
+            get
+            {
+                return price;
+            }
+            set
+            {
+                SetPrice(value);
+            }
+        }
         private int inStock;
-        public int InStock { get; set; }
+        public int InStock {
+            get
+            {
+                return inStock;
+            }
+            set
+            {
+                SetInStock(value);
+            }
+        }
         private int min;
-        public int Min { get; set; }
+        public int Min {
+            get
+            {
+                return min;
+            }
+            set
+            {
+                SetMin(value);
+            }
+        }
         private int max;
-        public int Max { get; set; }
+        public int Max {
+            get
+            {
+                return max;
+            }
+            set
+            {
+                SetMax(value);
+            }
+        }
 
         public Product(int productID, string name, double price, int inStock, int min, int max)
         {
@@ -33,11 +79,22 @@ namespace C968_Inventory_App
             this.inStock = inStock;
             this.min = min;
             this.max = max;
+            NotifyPropertyChanged();
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        // This method is called by the Set accessor of each property.  
+        // The CallerMemberName attribute that is applied to the optional propertyName  
+        // parameter causes the property name of the caller to be substituted as an argument.  
+        protected void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         public void SetName(string name)
         {
             this.name = name;
+            NotifyPropertyChanged();
         }
         public string GetName()
         {
@@ -46,6 +103,7 @@ namespace C968_Inventory_App
         public void SetPrice(double price)
         {
             this.price = price;
+            NotifyPropertyChanged();
         }
         public double GetPrice()
         {
@@ -54,6 +112,7 @@ namespace C968_Inventory_App
         public void SetInStock(int inStock)
         {
             this.inStock = inStock;
+            NotifyPropertyChanged();
         }
         public int GetInStock()
         {
@@ -62,6 +121,7 @@ namespace C968_Inventory_App
         public void SetMin(int min)
         {
             this.min = min;
+            NotifyPropertyChanged();
         }
         public int GetMin()
         {
@@ -70,6 +130,7 @@ namespace C968_Inventory_App
         public void SetMax(int max)
         {
             this.max = max;
+            NotifyPropertyChanged();
         }
         public int GetMax()
         {
@@ -78,6 +139,7 @@ namespace C968_Inventory_App
         public void SetProductID(int productID)
         {
             this.productID = productID;
+            NotifyPropertyChanged();
         }
         public int GetProductID()
         {
@@ -86,12 +148,14 @@ namespace C968_Inventory_App
         public void AddAssociatedPart(Part part)
         {
             associatedParts.Add(part);
+            NotifyPropertyChanged();
         }
         public bool RemoveAssociatedPart(int partID)
         {
             try
             {
                 associatedParts.Remove(LookupAssociatedPart(partID));
+                NotifyPropertyChanged();
                 return true;
             }
             catch (Exception)
@@ -110,7 +174,5 @@ namespace C968_Inventory_App
             }
             return null;
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

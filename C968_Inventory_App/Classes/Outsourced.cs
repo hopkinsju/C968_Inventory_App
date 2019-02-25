@@ -11,6 +11,17 @@ namespace C968_Inventory_App
     class Outsourced : Part
     {
         private string companyName;
+        public string CompanyName
+        {
+            get
+            {
+                return companyName;
+            }
+            set
+            {
+                SetCompanyName(value);
+            }
+        }
 
         public Outsourced(int partID, string name, double price, int inStock, int min, int max, string companyName)
             : base(partID, name, price, inStock, min, max)

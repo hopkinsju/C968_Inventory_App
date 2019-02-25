@@ -11,13 +11,11 @@ namespace C968_Inventory_App
     abstract class Part : INotifyPropertyChanged
     {
         private int partID;
-
         public int PartID
         {
             get { return GetPartId(); }
             set { SetPartId(value); }
         }
-
         private string name;
         public string Name {
             get
@@ -27,19 +25,9 @@ namespace C968_Inventory_App
 
             set
             {
-                this.name = value;
-                NotifyPropertyChanged();
+                SetName(value);
             }
         }
-
-        // This method is called by the Set accessor of each property.  
-        // The CallerMemberName attribute that is applied to the optional propertyName  
-        // parameter causes the property name of the caller to be substituted as an argument.  
-        protected void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
         private double price;
         public double Price {
             get
@@ -48,19 +36,42 @@ namespace C968_Inventory_App
             }
             set
             {
-                this.price = value;
-                NotifyPropertyChanged("Price");
+                SetPrice(value);
             }
         }
         private int inStock;
-        public int InStock { get; set; }
+        public int InStock {
+            get
+            {
+                return inStock;
+            }
+            set
+            {
+                SetInStock(value);
+            }
+        }
         private int min;
-        public int Min { get; set; }
+        public int Min {
+            get
+            {
+                return min;
+            }
+            set
+            {
+                SetMin(value);
+            }
+        }
         private int max;
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public int Max { get; set; }
+        public int Max {
+            get
+            {
+                return max;
+            }
+            set
+            {
+                SetMax(value);
+            }
+        }
 
         public Part(int partID, string name, double price, int inStock, int min, int max)
         {
@@ -72,9 +83,19 @@ namespace C968_Inventory_App
             this.max = max;
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+        // This method is called by the Set accessor of each property.  
+        // The CallerMemberName attribute that is applied to the optional propertyName  
+        // parameter causes the property name of the caller to be substituted as an argument.  
+        protected void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
         public void SetName(string name)
         {
             this.name = name;
+            NotifyPropertyChanged();
         }
         public string GetName()
         {
@@ -83,6 +104,7 @@ namespace C968_Inventory_App
         public void SetPrice(double price)
         {
             this.price = price;
+            NotifyPropertyChanged();
         }
         public double GetPrice()
         {
@@ -91,6 +113,7 @@ namespace C968_Inventory_App
         public void SetInStock(int inStock)
         {
             this.inStock = inStock;
+            NotifyPropertyChanged();
         }
         public int GetInStock()
         {
@@ -99,6 +122,7 @@ namespace C968_Inventory_App
         public void SetMin(int min)
         {
             this.min = min;
+            NotifyPropertyChanged();
         }
         public int GetMin()
         {
@@ -107,6 +131,7 @@ namespace C968_Inventory_App
         public void SetMax(int max)
         {
             this.max = max;
+            NotifyPropertyChanged();
         }
         public int GetMax()
         {
