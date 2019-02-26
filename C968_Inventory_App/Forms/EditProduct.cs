@@ -12,14 +12,27 @@ namespace C968_Inventory_App
 {
     public partial class EditProduct : ItemDetailForm
     {
-        public EditProduct()
+        public EditProduct(Inventory inv, Product product)
+            : base(inv, product)
         {
             InitializeComponent();
+            EditPageLabel.Text = "Modify Product";
+            PrepForm();
+        }
+        public EditProduct(Inventory inv)
+            : base(inv)
+        {
+            InitializeComponent();
+            EditPageLabel.Text = "Add Product";
+            PrepForm();
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void PrepForm()
         {
-
+            SourceIDInput.Hide();
+            SourceLabel.Hide();
+            InHouseRadio.Hide();
+            OutsourcedRadio.Hide();
         }
     }
 }

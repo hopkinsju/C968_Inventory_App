@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace C968_Inventory_App
 {
-    class Outsourced : Part
+    public class Outsourced : Part
     {
         private string companyName;
-        public string CompanyName
+        public override string CompanyName
         {
             get
             {
@@ -22,6 +22,7 @@ namespace C968_Inventory_App
                 SetCompanyName(value);
             }
         }
+        public override int MachineID { set; get; }
 
         public Outsourced(int partID, string name, double price, int inStock, int min, int max, string companyName)
             : base(partID, name, price, inStock, min, max)

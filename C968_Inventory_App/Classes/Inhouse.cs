@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace C968_Inventory_App
 {
-    class Inhouse : Part
+    public class Inhouse : Part
     {
         private int machineID;
-        public int MachineID
+        public override int MachineID
         {
             get
             {
@@ -17,9 +17,10 @@ namespace C968_Inventory_App
             }
             set
             {
-                setMachineID(value);
+                SetMachineID(value);
             }
         }
+        public override string CompanyName { set; get; }
 
         public Inhouse(int partID, string name, double price, int inStock, int min, int max, int machineID)
             : base(partID, name, price, inStock, min, max)
@@ -27,12 +28,12 @@ namespace C968_Inventory_App
             this.machineID = machineID;
         }
 
-        public void setMachineID(int machineID)
+        public void SetMachineID(int machineID)
         {
             this.machineID = machineID;
             NotifyPropertyChanged();
         }
-        public int getMachineID()
+        public int GetMachineID()
         {
             return machineID;
         }

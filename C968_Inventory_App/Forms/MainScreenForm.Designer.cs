@@ -99,6 +99,7 @@
             this.ModifyPartButton.TabIndex = 6;
             this.ModifyPartButton.Text = "Modify";
             this.ModifyPartButton.UseVisualStyleBackColor = true;
+            this.ModifyPartButton.Click += new System.EventHandler(this.ModifyPartButton_Click);
             // 
             // DeletePartButton
             // 
@@ -117,8 +118,11 @@
             this.PartsDataGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.PartsDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.PartsDataGrid.Location = new System.Drawing.Point(18, 106);
+            this.PartsDataGrid.MultiSelect = false;
             this.PartsDataGrid.Name = "PartsDataGrid";
             this.PartsDataGrid.ReadOnly = true;
+            this.PartsDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.PartsDataGrid.ShowEditingIcon = false;
             this.PartsDataGrid.Size = new System.Drawing.Size(534, 262);
             this.PartsDataGrid.TabIndex = 2;
             // 
@@ -175,6 +179,7 @@
             this.ModifyProductButton.TabIndex = 6;
             this.ModifyProductButton.Text = "Modify";
             this.ModifyProductButton.UseVisualStyleBackColor = true;
+            this.ModifyProductButton.Click += new System.EventHandler(this.ModifyProductButton_Click);
             // 
             // DeleteProductButton
             // 
@@ -188,10 +193,15 @@
             // 
             // ProductsDataGrid
             // 
+            this.ProductsDataGrid.AllowUserToAddRows = false;
+            this.ProductsDataGrid.AllowUserToDeleteRows = false;
             this.ProductsDataGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.ProductsDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ProductsDataGrid.Location = new System.Drawing.Point(18, 106);
+            this.ProductsDataGrid.MultiSelect = false;
             this.ProductsDataGrid.Name = "ProductsDataGrid";
+            this.ProductsDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.ProductsDataGrid.ShowEditingIcon = false;
             this.ProductsDataGrid.Size = new System.Drawing.Size(534, 262);
             this.ProductsDataGrid.TabIndex = 2;
             // 

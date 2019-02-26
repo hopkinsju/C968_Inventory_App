@@ -9,11 +9,22 @@ using System.Threading.Tasks;
 
 namespace C968_Inventory_App
 {
-    class Product : INotifyPropertyChanged
+    public class Product : INotifyPropertyChanged
     {
         private ArrayList associatedParts;
         private int productID;
-        public int ProductID { get; }
+        public int ProductID
+        {
+            get
+            {
+                return productID;
+            }
+            set
+            {
+                productID = value;
+                NotifyPropertyChanged();
+            }
+        }
         private string name;
         public string Name {
             get
@@ -79,7 +90,6 @@ namespace C968_Inventory_App
             this.inStock = inStock;
             this.min = min;
             this.max = max;
-            NotifyPropertyChanged();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

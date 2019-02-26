@@ -230,6 +230,7 @@
             this.SaveButton.TabIndex = 7;
             this.SaveButton.Text = "Save";
             this.SaveButton.UseVisualStyleBackColor = true;
+            this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
             // FormCancelButton
             // 
@@ -316,7 +317,7 @@
 
         #endregion
 
-        private CustomControls.PageLabel EditPageLabel;
+        protected CustomControls.PageLabel EditPageLabel;
         private System.Windows.Forms.TableLayoutPanel LayoutPanel;
         private System.Windows.Forms.Label MinCountLabel;
         private System.Windows.Forms.Label IDLabel;
@@ -330,12 +331,12 @@
         private System.Windows.Forms.TextBox PriceInput;
         private System.Windows.Forms.TextBox MinCountInput;
         private System.Windows.Forms.TextBox MaxCountInput;
-        private System.Windows.Forms.TextBox SourceIDInput;
-        private System.Windows.Forms.Label SourceLabel;
+        protected System.Windows.Forms.TextBox SourceIDInput;
+        protected System.Windows.Forms.Label SourceLabel;
         private System.Windows.Forms.Button SaveButton;
         private System.Windows.Forms.Button FormCancelButton;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.RadioButton OutsourcedRadio;
-        private System.Windows.Forms.RadioButton InHouseRadio;
+        protected System.Windows.Forms.RadioButton OutsourcedRadio;
+        protected System.Windows.Forms.RadioButton InHouseRadio;
     }
 }

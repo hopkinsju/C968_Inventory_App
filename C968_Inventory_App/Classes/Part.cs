@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace C968_Inventory_App
 {
-    abstract class Part : INotifyPropertyChanged
+    public abstract class Part : INotifyPropertyChanged
     {
         private int partID;
         public int PartID
@@ -72,6 +72,8 @@ namespace C968_Inventory_App
                 SetMax(value);
             }
         }
+        public abstract int MachineID { get; set; }
+        public abstract string CompanyName { get; set; }
 
         public Part(int partID, string name, double price, int inStock, int min, int max)
         {
