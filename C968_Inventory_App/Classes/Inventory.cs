@@ -47,8 +47,13 @@ namespace C968_Inventory_App
         }
         public static void UpdateProduct(int productID, Product replacement)
         {
-            //Product product = Products.Find(x => x.GetProductID().Equals(productID));
-            //product = replacement;
+            Product oldProduct = Products.Where(i => i.ProductID == productID).First();
+            var index = Products.IndexOf(oldProduct);
+
+            if (index != -1)
+                Products[index] = replacement;
+
+            oldProduct = replacement;
         }
         public static void AddPart(Part part)
         {
@@ -80,7 +85,6 @@ namespace C968_Inventory_App
         }
         public static void UpdatePart(int partID, Part replacement)
         {
-            System.Windows.Forms.MessageBox.Show("Updating Part");
             Part oldPart = AllParts.Where(i => i.PartID == partID).First();
             var index = AllParts.IndexOf(oldPart);
 

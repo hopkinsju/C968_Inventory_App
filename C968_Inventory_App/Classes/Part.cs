@@ -20,7 +20,7 @@ namespace C968_Inventory_App
         public string Name {
             get
             {
-                return name;
+                return GetName();
             }
 
             set
@@ -32,7 +32,7 @@ namespace C968_Inventory_App
         public double Price {
             get
             {
-                return price;
+                return GetPrice();
             }
             set
             {
@@ -43,7 +43,7 @@ namespace C968_Inventory_App
         public int InStock {
             get
             {
-                return inStock;
+                return GetInStock();
             }
             set
             {
@@ -54,7 +54,7 @@ namespace C968_Inventory_App
         public int Min {
             get
             {
-                return min;
+                return GetMin();
             }
             set
             {
@@ -65,7 +65,7 @@ namespace C968_Inventory_App
         public int Max {
             get
             {
-                return max;
+                return GetMax();
             }
             set
             {
@@ -75,14 +75,15 @@ namespace C968_Inventory_App
         public abstract int MachineID { get; set; }
         public abstract string CompanyName { get; set; }
 
+        public Part() {}
         public Part(int partID, string name, double price, int inStock, int min, int max)
         {
-            this.partID = partID;
-            this.name = name;
-            this.price = price;
-            this.inStock = inStock;
-            this.min = min;
-            this.max = max;
+            PartID = partID;
+            Name = name;
+            Price = price;
+            InStock = inStock;
+            Min = min;
+            Max = max;
         }
 
         public void SetName(string name)
@@ -95,6 +96,10 @@ namespace C968_Inventory_App
         }
         public void SetPrice(double price)
         {
+            if (price <= 0)
+            {
+                throw new Exception("Price cannot be negative or zero");
+            }
             this.price = price;
         }
         public double GetPrice()
@@ -119,6 +124,10 @@ namespace C968_Inventory_App
         }
         public void SetMax(int max)
         {
+            if (max < min)
+            {
+                throw new Exception("Max cannot be less than min");
+            }
             this.max = max;
         }
         public int GetMax()

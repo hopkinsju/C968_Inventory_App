@@ -77,51 +77,34 @@ namespace C968_Inventory_App
         }
         public override void SaveItem()
         {
-            if (isNew)
+            try
             {
-                if (InHouseRadio.Checked)
+                if (isNew)
                 {
-                    Inventory.AddPart(new Inhouse(
-                            Convert.ToInt32(IDInput.Text),
-                            NameInput.Text,
-                            Convert.ToDouble(PriceInput.Text),
-                            Convert.ToInt32(CountInput.Text),
-                            Convert.ToInt32(MinCountInput.Text),
-                            Convert.ToInt32(MaxCountInput.Text),
-                            Convert.ToInt32(SourceIDInput.Text)
-                            ));
-                }
-                else
-                {
-                    Inventory.AddPart(new Outsourced(
-                        Convert.ToInt32(IDInput.Text),
-                        NameInput.Text,
-                        Convert.ToDouble(PriceInput.Text),
-                        Convert.ToInt32(CountInput.Text),
-                        Convert.ToInt32(MinCountInput.Text),
-                        Convert.ToInt32(MaxCountInput.Text),
-                        SourceIDInput.Text
-                        ));
-                }
-            }
-            else
-            {
-                Part updatedPart;
-                if (InHouseRadio.Checked)
-                {
-                    updatedPart = new Inhouse(
-                            Convert.ToInt32(IDInput.Text),
-                            NameInput.Text,
-                            Convert.ToDouble(PriceInput.Text),
-                            Convert.ToInt32(CountInput.Text),
-                            Convert.ToInt32(MinCountInput.Text),
-                            Convert.ToInt32(MaxCountInput.Text),
-                            Convert.ToInt32(SourceIDInput.Text)
-                            );
-                }
-                else
-                {
-                    updatedPart = new Outsourced(
+                    if (InHouseRadio.Checked)
+                    {
+                        //Inventory.AddPart(new Inhouse(
+                        //        Convert.ToInt32(IDInput.Text),
+                        //        NameInput.Text,
+                        //        Convert.ToDouble(PriceInput.Text),
+                        //        Convert.ToInt32(CountInput.Text),
+                        //        Convert.ToInt32(MinCountInput.Text),
+                        //        Convert.ToInt32(MaxCountInput.Text),
+                        //        Convert.ToInt32(SourceIDInput.Text)
+                        //        ));
+                        Part newPart = new Inhouse();
+                        newPart.PartID = Convert.ToInt32(IDInput.Text);
+                        newPart.Name = NameInput.Text;
+                        newPart.Price = Convert.ToDouble(PriceInput.Text);
+                        newPart.InStock = Convert.ToInt32(CountInput.Text);
+                        newPart.Min = Convert.ToInt32(MinCountInput.Text);
+                        newPart.Max = Convert.ToInt32(MaxCountInput.Text);
+                        newPart.MachineID = Convert.ToInt32(SourceIDInput.Text);
+                        Inventory.AddPart(newPart);
+                    }
+                    else
+                    {
+                        Inventory.AddPart(new Outsourced(
                             Convert.ToInt32(IDInput.Text),
                             NameInput.Text,
                             Convert.ToDouble(PriceInput.Text),
@@ -129,12 +112,47 @@ namespace C968_Inventory_App
                             Convert.ToInt32(MinCountInput.Text),
                             Convert.ToInt32(MaxCountInput.Text),
                             SourceIDInput.Text
-                            );
+                            ));
+                    }
                 }
+                else
+                {
+                    Part updatedPart;
+                    if (InHouseRadio.Checked)
+                    {
+                        updatedPart = new Inhouse(
+                                Convert.ToInt32(IDInput.Text),
+                                NameInput.Text,
+                                Convert.ToDouble(PriceInput.Text),
+                                Convert.ToInt32(CountInput.Text),
+                                Convert.ToInt32(MinCountInput.Text),
+                                Convert.ToInt32(MaxCountInput.Text),
+                                Convert.ToInt32(SourceIDInput.Text)
+                                );
+                    }
+                    else
+                    {
+                        updatedPart = new Outsourced(
+                                Convert.ToInt32(IDInput.Text),
+                                NameInput.Text,
+                                Convert.ToDouble(PriceInput.Text),
+                                Convert.ToInt32(CountInput.Text),
+                                Convert.ToInt32(MinCountInput.Text),
+                                Convert.ToInt32(MaxCountInput.Text),
+                                SourceIDInput.Text
+                                );
+                    }
 
-                Inventory.UpdatePart(Convert.ToInt32(IDInput.Text), updatedPart);
+                    Inventory.UpdatePart(Convert.ToInt32(IDInput.Text), updatedPart);
+                }
+                this.Hide();
             }
-            this.Hide();
+            catch (Exception ex)
+            {
+                MessageBox.Show($"A problem occurred during save: {ex.Message}");
+                return;
+            }
+            
         }
 
     }

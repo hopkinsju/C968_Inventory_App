@@ -11,13 +11,13 @@ namespace C968_Inventory_App
 {
     public class Product
     {
-        public ArrayList associatedParts;
+        private ArrayList associatedParts;
         private int productID;
         public int ProductID
         {
             get
             {
-                return productID;
+                return GetProductID();
             }
             set
             {
@@ -25,21 +25,77 @@ namespace C968_Inventory_App
             }
         }
         private string name;
+        public string Name {
+            get
+            {
+                return GetName();
+            }
+            set
+            {
+                SetName(value);
+            }
+        }
         private double price;
+        public double Price {
+            get
+            {
+                return GetPrice();
+            }
+            set
+            {
+                SetPrice(value);
+            }
+        }
         private int inStock;
+        public int InStock {
+            get
+            {
+                return GetInStock();
+            }
+            set
+            {
+                SetInStock(value);
+            }
+        }
         private int min;
+        public int Min {
+            get
+            {
+                return GetMin();
+            }
+            set
+            {
+                SetMin(value);
+            }
+        }
         private int max;
+        public int Max {
+            get
+            {
+                return GetMax();
+            }
+            set
+            {
+                SetMax(value);
+            }
+        }
 
         public Product(int productID, string name, double price, int inStock, int min, int max)
         {
             associatedParts = new ArrayList();
-            this.productID = productID;
-            this.name = name;
-            this.price = price;
-            this.inStock = inStock;
-            this.min = min;
-            this.max = max;
+            ProductID = productID;
+            Name = name;
+            Price = price;
+            InStock = inStock;
+            Min = min;
+            Max = max;
         }
+        public Product(int productID, string name, double price, int inStock, int min, int max, ArrayList associatedParts)
+            :this(productID, name, price, inStock, min, max)
+        {
+            this.associatedParts = associatedParts;
+        }
+
 
         public void SetName(string name)
         {
@@ -51,6 +107,10 @@ namespace C968_Inventory_App
         }
         public void SetPrice(double price)
         {
+            if (price <= 0)
+            {
+                throw new Exception("Price cannot be negative or zero");
+            }
             this.price = price;
         }
         public double GetPrice()
@@ -75,6 +135,9 @@ namespace C968_Inventory_App
         }
         public void SetMax(int max)
         {
+            if (max < min) {
+                throw new Exception("Max cannot be less than min");
+            }
             this.max = max;
         }
         public int GetMax()
@@ -88,6 +151,10 @@ namespace C968_Inventory_App
         public int GetProductID()
         {
             return productID;
+        }
+        public ArrayList GetAssociatedParts()
+        {
+            return associatedParts;
         }
         public void AddAssociatedPart(Part part)
         {

@@ -22,6 +22,7 @@ namespace C968_Inventory_App
         }
         public override string CompanyName { set; get; }
 
+        public Inhouse() {}
         public Inhouse(int partID, string name, double price, int inStock, int min, int max, int machineID)
             : base(partID, name, price, inStock, min, max)
         {

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -56,18 +57,27 @@ namespace C968_Inventory_App
             allPartsListDataGrid.Columns["Max"].Visible = false;
 
             associatedPartsDataGrid.DataSource = associatedPartsBindingList;
+            associatedPartsDataGrid.Columns["Price"].DefaultCellStyle.Format = "c";
+            associatedPartsDataGrid.Columns["Price"].HeaderText = "Price/Cost Per Unit";
+            associatedPartsDataGrid.Columns["PartID"].HeaderText = "Part ID";
+            associatedPartsDataGrid.Columns["CompanyName"].Visible = false;
+            associatedPartsDataGrid.Columns["MachineID"].Visible = false;
+            associatedPartsDataGrid.Columns["Min"].Visible = false;
+            associatedPartsDataGrid.Columns["Max"].Visible = false;
+
+            
         }
 
         private void LoadProduct(Product product)
         {
-            IDInput.Text = product.ProductID.ToString();
+            IDInput.Text = product.GetProductID().ToString();
             IDInput.Enabled = false;
             NameInput.Text = product.GetName();
             CountInput.Text = product.GetInStock().ToString();
             PriceInput.Text = product.GetPrice().ToString();
             MinCountInput.Text = product.GetMin().ToString();
             MaxCountInput.Text = product.GetMax().ToString();
-            foreach (Part part in product.associatedParts)
+            foreach (Part part in product.GetAssociatedParts())
             {
                 associatedPartsBindingList.Add(part);
             }
@@ -126,6 +136,7 @@ namespace C968_Inventory_App
             {
                 MessageBox.Show("No parts selected.");
             }
+            RefreshButtonStates();
         }
 
         private void DeletePartButton_Click(object sender, EventArgs e)
@@ -134,6 +145,12 @@ namespace C968_Inventory_App
             int partID = Convert.ToInt32(selectedRow.Cells["PartID"].Value);
             Part partToDelete = Inventory.LookupPart(partID);
             associatedPartsBindingList.Remove(partToDelete);
+            RefreshButtonStates();
+        }
+
+        private void RefreshButtonStates()
+        {
+            DeletePartButton.Enabled = associatedPartsBindingList.Count().Equals(0) ? false : true;
         }
 
         public override void SaveButton_Click(object sender, EventArgs e)
@@ -142,6 +159,12 @@ namespace C968_Inventory_App
         }
         public override void SaveItem()
         {
+            ArrayList associatedPartsToSave = new ArrayList();
+            foreach (Part part in associatedPartsBindingList)
+            {
+                associatedPartsToSave.Add(part);
+            }
+
             if (isNew)
             {
                 Inventory.AddProduct(new Product(
@@ -150,7 +173,8 @@ namespace C968_Inventory_App
                     Convert.ToDouble(PriceInput.Text),
                     Convert.ToInt32(CountInput.Text),
                     Convert.ToInt32(MinCountInput.Text),
-                    Convert.ToInt32(MaxCountInput.Text)
+                    Convert.ToInt32(MaxCountInput.Text),
+                    associatedPartsToSave
                     ));
             }
             else
@@ -162,7 +186,8 @@ namespace C968_Inventory_App
                         Convert.ToDouble(PriceInput.Text),
                         Convert.ToInt32(CountInput.Text),
                         Convert.ToInt32(MinCountInput.Text),
-                        Convert.ToInt32(MaxCountInput.Text)
+                        Convert.ToInt32(MaxCountInput.Text),
+                        associatedPartsToSave
                         );
                 Inventory.UpdateProduct(Convert.ToInt32(IDInput.Text), updatedProduct);
             }
