@@ -159,39 +159,47 @@ namespace C968_Inventory_App
         }
         public override void SaveItem()
         {
-            ArrayList associatedPartsToSave = new ArrayList();
-            foreach (Part part in associatedPartsBindingList)
+            try
             {
-                associatedPartsToSave.Add(part);
-            }
+                ArrayList associatedPartsToSave = new ArrayList();
+                foreach (Part part in associatedPartsBindingList)
+                {
+                    associatedPartsToSave.Add(part);
+                }
 
-            if (isNew)
-            {
-                Inventory.AddProduct(new Product(
-                    Convert.ToInt32(IDInput.Text),
-                    NameInput.Text,
-                    Convert.ToDouble(PriceInput.Text),
-                    Convert.ToInt32(CountInput.Text),
-                    Convert.ToInt32(MinCountInput.Text),
-                    Convert.ToInt32(MaxCountInput.Text),
-                    associatedPartsToSave
-                    ));
-            }
-            else
-            {
-                Product updatedProduct;
-                updatedProduct = new Product(
-                        Convert.ToInt32(IDInput.Text),
+                if (isNew)
+                {
+                    Inventory.AddProduct(new Product(
                         NameInput.Text,
                         Convert.ToDouble(PriceInput.Text),
                         Convert.ToInt32(CountInput.Text),
                         Convert.ToInt32(MinCountInput.Text),
                         Convert.ToInt32(MaxCountInput.Text),
                         associatedPartsToSave
-                        );
-                Inventory.UpdateProduct(Convert.ToInt32(IDInput.Text), updatedProduct);
+                        ));
+                }
+                else
+                {
+                    Product updatedProduct;
+                    updatedProduct = new Product(
+                            Convert.ToInt32(IDInput.Text),
+                            NameInput.Text,
+                            Convert.ToDouble(PriceInput.Text),
+                            Convert.ToInt32(CountInput.Text),
+                            Convert.ToInt32(MinCountInput.Text),
+                            Convert.ToInt32(MaxCountInput.Text),
+                            associatedPartsToSave
+                            );
+                    Inventory.UpdateProduct(Convert.ToInt32(IDInput.Text), updatedProduct);
+                }
+                this.Hide();
             }
-            this.Hide();
+            catch (Exception ex)
+            {
+                MessageBox.Show($"A problem occurred during save: {ex.Message}");
+                return;
+            }
+           
         }
     }
 }

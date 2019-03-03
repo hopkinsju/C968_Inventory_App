@@ -80,8 +80,8 @@ namespace C968_Inventory_App
             }
         }
 
-        public Product(string name, double price, int inStock, int min, int  max)
-            : this(Inventory.GetNextProductID(), name, price, inStock, min, max) { }
+        public Product(string name, double price, int inStock, int min, int  max, ArrayList associatedParts)
+            : this(Inventory.GetNextProductID(), name, price, inStock, min, max, associatedParts) { }
 
         public Product(int productID, string name, double price, int inStock, int min, int max)
         {
