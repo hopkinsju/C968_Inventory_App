@@ -33,6 +33,13 @@ namespace C968_Inventory_App
             Inventory.AddPart(new Outsourced(Inventory.nextPartID, "part 3", 12.10, 3, 0, 100, "Acme Co."));
             Inventory.AddProduct(new Product(Inventory.nextProductID, "product 1", 45.00, 15, 1, 25));
             Inventory.AddProduct(new Product(Inventory.nextProductID, "product 2", 45.00, 15, 1, 25));
+            Product p1 = Inventory.LookupProduct(0);
+            Product p2 = Inventory.LookupProduct(1);
+            p1.AddAssociatedPart(Inventory.LookupPart(0));
+            p1.AddAssociatedPart(Inventory.LookupPart(1));
+            p1.AddAssociatedPart(Inventory.LookupPart(2));
+            p2.AddAssociatedPart(Inventory.LookupPart(2));
+
         }
 
         private void ExitButton_Click(object sender, EventArgs e)
@@ -258,14 +265,15 @@ namespace C968_Inventory_App
             {
                 if (productToDelete.associatedParts.Count > 0)
                 {
-                    throw new Exception("Cannot delete product with parts associated");
+                    throw new Exception();
                 }
                 Inventory.RemoveProduct(productID);
                 RefreshDataGridViews();
             }
             catch (Exception)
             {
-                MessageBox.Show(e.ToString());
+                MessageBox.Show("Cannot delete product with parts associated");
+                return;
             }
             
             Inventory.RemoveProduct(productID);

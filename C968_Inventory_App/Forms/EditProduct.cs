@@ -62,48 +62,18 @@ namespace C968_Inventory_App
         {
             IDInput.Text = product.ProductID.ToString();
             IDInput.Enabled = false;
-            NameInput.Text = product.Name;
-            CountInput.Text = product.InStock.ToString();
-            PriceInput.Text = product.Price.ToString();
-            MinCountInput.Text = product.Min.ToString();
-            MaxCountInput.Text = product.Max.ToString();
+            NameInput.Text = product.GetName();
+            CountInput.Text = product.GetInStock().ToString();
+            PriceInput.Text = product.GetPrice().ToString();
+            MinCountInput.Text = product.GetMin().ToString();
+            MaxCountInput.Text = product.GetMax().ToString();
             foreach (Part part in product.associatedParts)
             {
                 associatedPartsBindingList.Add(part);
             }
             //associatedPartsDataGrid.DataSource = associatedPartsBindingList;
         }
-
-
-        public override void SaveItem()
-        {
-            if (isNew)
-            {
-                    Inventory.AddProduct(new Product(
-                        Convert.ToInt32(IDInput.Text),
-                        NameInput.Text,
-                        Convert.ToDouble(PriceInput.Text),
-                        Convert.ToInt32(CountInput.Text),
-                        Convert.ToInt32(MinCountInput.Text),
-                        Convert.ToInt32(MaxCountInput.Text)
-                        ));
-            }
-            else
-            {
-                Product updatedProduct;
-                updatedProduct = new Product(
-                        Convert.ToInt32(IDInput.Text),
-                        NameInput.Text,
-                        Convert.ToDouble(PriceInput.Text),
-                        Convert.ToInt32(CountInput.Text),
-                        Convert.ToInt32(MinCountInput.Text),
-                        Convert.ToInt32(MaxCountInput.Text)
-                        );
-                Inventory.UpdateProduct(Convert.ToInt32(IDInput.Text), updatedProduct);
-            }
-            this.Hide();
-        }
-
+        
         private void PartSearchInput_Enter(object sender, EventArgs e)
         {
             PartSearchInput.Text = (PartSearchInput.Text == "Search by Part ID") ? "" : PartSearchInput.Text;
@@ -156,6 +126,47 @@ namespace C968_Inventory_App
             {
                 MessageBox.Show("No parts selected.");
             }
+        }
+
+        private void DeletePartButton_Click(object sender, EventArgs e)
+        {
+            DataGridViewRow selectedRow = associatedPartsDataGrid.SelectedRows[0];
+            int partID = Convert.ToInt32(selectedRow.Cells["PartID"].Value);
+            Part partToDelete = Inventory.LookupPart(partID);
+            associatedPartsBindingList.Remove(partToDelete);
+        }
+
+        public override void SaveButton_Click(object sender, EventArgs e)
+        {
+            base.SaveButton_Click(sender, e);
+        }
+        public override void SaveItem()
+        {
+            if (isNew)
+            {
+                Inventory.AddProduct(new Product(
+                    Convert.ToInt32(IDInput.Text),
+                    NameInput.Text,
+                    Convert.ToDouble(PriceInput.Text),
+                    Convert.ToInt32(CountInput.Text),
+                    Convert.ToInt32(MinCountInput.Text),
+                    Convert.ToInt32(MaxCountInput.Text)
+                    ));
+            }
+            else
+            {
+                Product updatedProduct;
+                updatedProduct = new Product(
+                        Convert.ToInt32(IDInput.Text),
+                        NameInput.Text,
+                        Convert.ToDouble(PriceInput.Text),
+                        Convert.ToInt32(CountInput.Text),
+                        Convert.ToInt32(MinCountInput.Text),
+                        Convert.ToInt32(MaxCountInput.Text)
+                        );
+                Inventory.UpdateProduct(Convert.ToInt32(IDInput.Text), updatedProduct);
+            }
+            this.Hide();
         }
     }
 }

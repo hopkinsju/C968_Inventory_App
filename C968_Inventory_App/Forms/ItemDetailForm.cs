@@ -85,7 +85,7 @@ namespace C968_Inventory_App
                 MaxCountInput.BackColor = Color.Pink;
             }
         }
-        public void SaveButton_Click(object sender, EventArgs e)
+        public virtual void SaveButton_Click(object sender, EventArgs e)
         {
             if (ValidateChildren())
             {

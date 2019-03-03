@@ -25,60 +25,10 @@ namespace C968_Inventory_App
             }
         }
         private string name;
-        public string Name {
-            get
-            {
-                return name;
-            }
-            set
-            {
-                SetName(value);
-            }
-        }
         private double price;
-        public double Price {
-            get
-            {
-                return price;
-            }
-            set
-            {
-                SetPrice(value);
-            }
-        }
         private int inStock;
-        public int InStock {
-            get
-            {
-                return inStock;
-            }
-            set
-            {
-                SetInStock(value);
-            }
-        }
         private int min;
-        public int Min {
-            get
-            {
-                return min;
-            }
-            set
-            {
-                SetMin(value);
-            }
-        }
         private int max;
-        public int Max {
-            get
-            {
-                return max;
-            }
-            set
-            {
-                SetMax(value);
-            }
-        }
 
         public Product(int productID, string name, double price, int inStock, int min, int max)
         {
