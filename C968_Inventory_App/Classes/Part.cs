@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace C968_Inventory_App
 {
-    public abstract class Part : INotifyPropertyChanged
+    public abstract class Part
     {
         private int partID;
         public int PartID
@@ -85,19 +85,9 @@ namespace C968_Inventory_App
             this.max = max;
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        // This method is called by the Set accessor of each property.  
-        // The CallerMemberName attribute that is applied to the optional propertyName  
-        // parameter causes the property name of the caller to be substituted as an argument.  
-        protected void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
         public void SetName(string name)
         {
             this.name = name;
-            NotifyPropertyChanged();
         }
         public string GetName()
         {
@@ -106,7 +96,6 @@ namespace C968_Inventory_App
         public void SetPrice(double price)
         {
             this.price = price;
-            NotifyPropertyChanged();
         }
         public double GetPrice()
         {
@@ -115,7 +104,6 @@ namespace C968_Inventory_App
         public void SetInStock(int inStock)
         {
             this.inStock = inStock;
-            NotifyPropertyChanged();
         }
         public int GetInStock()
         {
@@ -124,7 +112,6 @@ namespace C968_Inventory_App
         public void SetMin(int min)
         {
             this.min = min;
-            NotifyPropertyChanged();
         }
         public int GetMin()
         {
@@ -133,7 +120,6 @@ namespace C968_Inventory_App
         public void SetMax(int max)
         {
             this.max = max;
-            NotifyPropertyChanged();
         }
         public int GetMax()
         {
@@ -142,7 +128,6 @@ namespace C968_Inventory_App
         public void SetPartId(int partID)
         {
             this.partID = partID;
-            NotifyPropertyChanged();
         }
         public int GetPartId()
         {

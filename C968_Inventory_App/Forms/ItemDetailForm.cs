@@ -178,7 +178,6 @@ namespace C968_Inventory_App
         {
             if (isNew)
             {
-                MessageBox.Show("isNew true");
                 if (InHouseRadio.Checked)
                 {
                     Inventory.AddPart(new Inhouse(

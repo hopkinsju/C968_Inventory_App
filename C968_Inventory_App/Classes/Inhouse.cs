@@ -31,7 +31,6 @@ namespace C968_Inventory_App
         public void SetMachineID(int machineID)
         {
             this.machineID = machineID;
-            NotifyPropertyChanged();
         }
         public int GetMachineID()
         {

@@ -33,7 +33,6 @@ namespace C968_Inventory_App
         public void SetCompanyName(string companyName)
         {
             this.companyName = companyName;
-            NotifyPropertyChanged();
         }
         public string GetCompanyName()
         {

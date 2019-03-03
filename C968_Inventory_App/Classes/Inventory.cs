@@ -47,8 +47,8 @@ namespace C968_Inventory_App
         }
         public static void UpdateProduct(int productID, Product replacement)
         {
-            Product product = Products.Find(x => x.GetProductID().Equals(productID));
-            product = replacement;
+            //Product product = Products.Find(x => x.GetProductID().Equals(productID));
+            //product = replacement;
         }
         public static void AddPart(Part part)
         {
@@ -86,11 +86,8 @@ namespace C968_Inventory_App
 
             if (index != -1)
                 AllParts[index] = replacement;
-            //NotifyPropertyChanged();
-            //Part oldPart = LookupPart(partID);
-            //System.Windows.Forms.MessageBox.Show($"oldPart name: {oldPart.GetName()}\nreplacement name: {replacement.GetName()}");
+
             oldPart = replacement;
-            //System.Windows.Forms.MessageBox.Show($"oldPart name: {oldPart.GetName()}");
 
         }    }
 }

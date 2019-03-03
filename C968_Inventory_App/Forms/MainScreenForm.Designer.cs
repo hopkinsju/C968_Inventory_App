@@ -122,6 +122,7 @@
             this.PartsDataGrid.MultiSelect = false;
             this.PartsDataGrid.Name = "PartsDataGrid";
             this.PartsDataGrid.ReadOnly = true;
+            this.PartsDataGrid.RowHeadersVisible = false;
             this.PartsDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.PartsDataGrid.ShowEditingIcon = false;
             this.PartsDataGrid.Size = new System.Drawing.Size(534, 262);
@@ -143,6 +144,7 @@
             this.PartsSearchButton.TabIndex = 0;
             this.PartsSearchButton.Text = "Search";
             this.PartsSearchButton.UseVisualStyleBackColor = true;
+            this.PartsSearchButton.Click += new System.EventHandler(this.PartsSearchButton_Click);
             // 
             // ProductsGroupBox
             // 

@@ -13,9 +13,10 @@ namespace C968_Inventory_App
     public partial class MainScreenForm : Form
     {
         // This BindingSource binds the list to the DataGridView control.  
-        private BindingSource partsBindingSource = new BindingSource();
-        private BindingSource productsBindingSource = new BindingSource();
-        //public static Inventory inv = new Inventory();
+        public static BindingSource partsBindingSource = new BindingSource();
+        public static BindingList<Part> partsBindingList = new BindingList<Part>(Inventory.AllParts);
+        public static BindingSource productsBindingSource = new BindingSource();
+        public static BindingList<Product> productsBindingList = new BindingList<Product>(Inventory.Products);
 
         public MainScreenForm()
         {
@@ -68,28 +69,32 @@ namespace C968_Inventory_App
 
 
             // Bind dataview to AllParts list
-            BindingList<Part> partsBindingList = new BindingList<Part>(Inventory.AllParts);
-            this.partsBindingSource.DataSource = partsBindingList;
-            this.PartsDataGrid.DataSource = this.partsBindingSource;
+            
+            partsBindingSource.DataSource = partsBindingList;
+            PartsDataGrid.DataSource = partsBindingSource;
             
 
             PartsDataGrid.Columns["Price"].DefaultCellStyle.Format = "c";
             PartsDataGrid.Columns["Price"].HeaderText = "Price/Cost Per Unit";
+            PartsDataGrid.Columns["PartID"].HeaderText = "Part ID";
             PartsDataGrid.Columns["CompanyName"].Visible = false;
             PartsDataGrid.Columns["MachineID"].Visible = false;
             PartsDataGrid.Columns["Min"].Visible = false;
             PartsDataGrid.Columns["Max"].Visible = false;
+            PartsDataGrid.RowHeadersVisible = false;
 
 
             // Bind dataview to Product list
-            BindingList<Product> productsBindingList = new BindingList<Product>(Inventory.Products);
-            this.productsBindingSource.DataSource = productsBindingList;
-            this.ProductsDataGrid.DataSource = this.productsBindingSource;
+            
+            productsBindingSource.DataSource = productsBindingList;
+            ProductsDataGrid.DataSource = productsBindingSource;
 
             ProductsDataGrid.Columns["Price"].DefaultCellStyle.Format = "c";
             ProductsDataGrid.Columns["Price"].HeaderText = "Price/Cost Per Unit";
             ProductsDataGrid.Columns["Min"].Visible = false;
             ProductsDataGrid.Columns["Max"].Visible = false;
+            ProductsDataGrid.RowHeadersVisible = false;
+
         }
 
         //private DataGridViewRow selectedRow;
@@ -179,6 +184,27 @@ namespace C968_Inventory_App
         private void MainScreenForm_Activated(object sender, EventArgs e)
         {
             RefreshDataGridViews();
+        }
+
+        private void PartsSearchButton_Click(object sender, EventArgs e)
+        {
+            bool found = false;
+            if (!int.TryParse(PartSearchInput.Text, out int searchID))
+            {
+                MessageBox.Show("Part ID must be numeric");
+                return;
+            }
+            foreach (DataGridViewRow row in PartsDataGrid.Rows)
+            {
+                Part part = (Part)row.DataBoundItem;
+                if (part.PartID == searchID)
+                {
+                    row.Selected = true;
+                    found = true;
+                    break;
+                }              
+            }
+            if (!found) { MessageBox.Show("Part ID not found"); }
         }
     }
 }
