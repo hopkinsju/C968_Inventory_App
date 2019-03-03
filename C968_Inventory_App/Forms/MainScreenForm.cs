@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -41,7 +42,7 @@ namespace C968_Inventory_App
 
         private void AddPartButton_Click(object sender, EventArgs e)
         {
-            ItemDetailForm partForm = new ItemDetailForm()
+            EditPart partForm = new EditPart()
             {
                 MdiParent = this.MdiParent
             };
@@ -112,7 +113,7 @@ namespace C968_Inventory_App
                 int partID = Convert.ToInt32(selectedRow.Cells["PartID"].Value);
                 Part part = Inventory.LookupPart(partID);
 
-                ItemDetailForm partForm = new ItemDetailForm(part)
+                EditPart partForm = new EditPart(part)
                 {
                     MdiParent = this.MdiParent
                 };
@@ -205,6 +206,70 @@ namespace C968_Inventory_App
                 }              
             }
             if (!found) { MessageBox.Show("Part ID not found"); }
+        }
+
+        private void ProductSearchButton_Click(object sender, EventArgs e)
+        {
+            bool found = false;
+            if (!int.TryParse(ProductSearchInput.Text, out int searchID))
+            {
+                MessageBox.Show("Product ID must be numeric");
+                return;
+            }
+            foreach (DataGridViewRow row in ProductsDataGrid.Rows)
+            {
+                Product product = (Product)row.DataBoundItem;
+                if (product.ProductID == searchID)
+                {
+                    row.Selected = true;
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) { MessageBox.Show("Product ID not found"); }
+        }
+
+        private void PartSearchInput_Enter(object sender, EventArgs e)
+        {
+            PartSearchInput.Text = (PartSearchInput.Text == "Search by Part ID") ? "" : PartSearchInput.Text;
+        }
+
+        private void ProductSearchInput_Enter(object sender, EventArgs e)
+        {
+            ProductSearchInput.Text = (ProductSearchInput.Text == "Search by Product ID") ? "" : ProductSearchInput.Text;
+        }
+
+        private void PartSearchInput_Leave(object sender, EventArgs e)
+        {
+            PartSearchInput.Text = (PartSearchInput.Text == "") ? "Search by Part ID" : PartSearchInput.Text;
+        }
+
+        private void ProductSearchInput_Leave(object sender, EventArgs e)
+        {
+            ProductSearchInput.Text = (ProductSearchInput.Text == "") ? "Search by Product ID" : ProductSearchInput.Text;
+        }
+
+        private void DeleteProductButton_Click(object sender, EventArgs e)
+        {
+            DataGridViewRow selectedRow = ProductsDataGrid.SelectedRows[0];
+            int productID = Convert.ToInt32(selectedRow.Cells["ProductID"].Value);
+            Product productToDelete = Inventory.LookupProduct(productID);
+            try
+            {
+                if (productToDelete.associatedParts.Count > 0)
+                {
+                    throw new Exception("Cannot delete product with parts associated");
+                }
+                Inventory.RemoveProduct(productID);
+                RefreshDataGridViews();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show(e.ToString());
+            }
+            
+            Inventory.RemoveProduct(productID);
+            RefreshDataGridViews();
         }
     }
 }

@@ -134,6 +134,9 @@
             this.PartSearchInput.Name = "PartSearchInput";
             this.PartSearchInput.Size = new System.Drawing.Size(177, 29);
             this.PartSearchInput.TabIndex = 1;
+            this.PartSearchInput.Text = "Search by Part ID";
+            this.PartSearchInput.Enter += new System.EventHandler(this.PartSearchInput_Enter);
+            this.PartSearchInput.Leave += new System.EventHandler(this.PartSearchInput_Leave);
             // 
             // PartsSearchButton
             // 
@@ -193,6 +196,7 @@
             this.DeleteProductButton.TabIndex = 7;
             this.DeleteProductButton.Text = "Remove";
             this.DeleteProductButton.UseVisualStyleBackColor = true;
+            this.DeleteProductButton.Click += new System.EventHandler(this.DeleteProductButton_Click);
             // 
             // ProductsDataGrid
             // 
@@ -214,6 +218,9 @@
             this.ProductSearchInput.Name = "ProductSearchInput";
             this.ProductSearchInput.Size = new System.Drawing.Size(177, 29);
             this.ProductSearchInput.TabIndex = 1;
+            this.ProductSearchInput.Text = "Search by Product ID";
+            this.ProductSearchInput.Enter += new System.EventHandler(this.ProductSearchInput_Enter);
+            this.ProductSearchInput.Leave += new System.EventHandler(this.ProductSearchInput_Leave);
             // 
             // ProductSearchButton
             // 
@@ -224,6 +231,7 @@
             this.ProductSearchButton.TabIndex = 0;
             this.ProductSearchButton.Text = "Search";
             this.ProductSearchButton.UseVisualStyleBackColor = true;
+            this.ProductSearchButton.Click += new System.EventHandler(this.ProductSearchButton_Click);
             // 
             // nameDataGridViewTextBoxColumn
             // 

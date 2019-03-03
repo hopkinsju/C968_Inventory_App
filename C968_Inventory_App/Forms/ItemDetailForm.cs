@@ -14,37 +14,14 @@ namespace C968_Inventory_App
     {
         protected Part part;
         protected Product product;
-        protected bool isNew = false;
-        protected static Inventory inv;
-        
-
-        public ItemDetailForm(Part part)
-        {
-            InitializeComponent();
-            EditPageLabel.Text = "Modify Part";
-            this.part = part;
-            LoadPart(part);
-        }
-
-        public ItemDetailForm(Product product)
-        {
-            InitializeComponent();
-            EditPageLabel.Text = "Modify Product";
-            this.product = product;
-            LoadProduct(product);
-        }
+        protected bool isNew;
 
         public ItemDetailForm()
         {
             InitializeComponent();
-            EditPageLabel.Text = "Add Part";
-            IDInput.Text = Convert.ToString(Inventory.nextPartID);
-            IDInput.Enabled = false;
-            isNew = true;
-            SourceLabel.Text = "Machine ID";
         }
 
-        void LoadForm()
+        public virtual void LoadForm()
         {
             this.AutoValidate = AutoValidate.Disable;
             NameInput.CausesValidation = true;
@@ -57,52 +34,11 @@ namespace C968_Inventory_App
             MinCountInput.Validating += new System.ComponentModel.CancelEventHandler(MinCountInput_Validating);
             MaxCountInput.CausesValidation = true;
             MaxCountInput.Validating += new System.ComponentModel.CancelEventHandler(MaxCountInput_Validating);
-            SourceIDInput.CausesValidation = true;
-            SourceIDInput.Validating += new System.ComponentModel.CancelEventHandler(SourceIDInput_Validating);
-
         }
 
         private void PartCancelButton_Click(object sender, EventArgs e)
         {
             Hide();
-        }
-
-        private void LoadPart(Part part)
-        {
-            IDInput.Text = part.PartID.ToString();
-            IDInput.Enabled = false;
-            NameInput.Text = part.Name;
-            CountInput.Text = part.InStock.ToString();
-            PriceInput.Text = part.Price.ToString();
-            MinCountInput.Text = part.Min.ToString();
-            MaxCountInput.Text = part.Max.ToString();
-            if (part is Inhouse)
-            {
-                InHouseRadio.Select();
-                SourceLabel.Text = "Machine ID";
-                SourceIDInput.Text = part.MachineID.ToString();
-            }
-            else
-            {
-                OutsourcedRadio.Select();
-                SourceLabel.Text = "Company Name";
-                SourceIDInput.Text = part.CompanyName.ToString();
-            }
-            LoadForm();
-        }
-        private void LoadProduct(Product product)
-        {
-            IDInput.Text = product.ProductID.ToString();
-            IDInput.Enabled = false;
-            NameInput.Text = product.Name;
-            CountInput.Text = product.InStock.ToString();
-            PriceInput.Text = product.Price.ToString("C");
-            MinCountInput.Text = product.Min.ToString();
-            MaxCountInput.Text = product.Max.ToString();
-        }
-        private void LoadPart(Outsourced part)
-        {
-
         }
         private void EditPartForm_change(object sender, EventArgs e)
         {
@@ -149,89 +85,20 @@ namespace C968_Inventory_App
                 MaxCountInput.BackColor = Color.Pink;
             }
         }
-        private void SourceIDInput_Validating(object sender, CancelEventArgs e)
+        public void SaveButton_Click(object sender, EventArgs e)
         {
-            if (InHouseRadio.Checked)
+            if (ValidateChildren())
             {
-                e.Cancel = (int.TryParse(SourceIDInput.Text, out int n)) ? false : true;
-            } else
-            {
-                e.Cancel = (SourceIDInput.Text.Length > 0) ? false : true;
-            }
-            if (e.Cancel)
-            {
-                SourceIDInput.BackColor = Color.Pink;
-            }
-        }
-        private void SaveButton_Click(object sender, EventArgs e)
-        {
-            if (this.ValidateChildren())
-            {
-                SavePart();
+                SaveItem();
             }
             else
             {
                 MessageBox.Show(NameInput, "Please supply valid values for highlighted fields.");
             }
         }
-        private void SavePart()
+        public virtual void SaveItem()
         {
-            if (isNew)
-            {
-                if (InHouseRadio.Checked)
-                {
-                    Inventory.AddPart(new Inhouse(
-                         Convert.ToInt32(IDInput.Text),
-                         NameInput.Text,
-                         Convert.ToDouble(PriceInput.Text),
-                         Convert.ToInt32(CountInput.Text),
-                         Convert.ToInt32(MinCountInput.Text),
-                         Convert.ToInt32(MaxCountInput.Text),
-                         Convert.ToInt32(SourceIDInput.Text)
-                         ));
-                } else
-                {
-                    Inventory.AddPart(new Outsourced(
-                        Convert.ToInt32(IDInput.Text),
-                        NameInput.Text,
-                        Convert.ToDouble(PriceInput.Text),
-                        Convert.ToInt32(CountInput.Text),
-                        Convert.ToInt32(MinCountInput.Text),
-                        Convert.ToInt32(MaxCountInput.Text),
-                        SourceIDInput.Text
-                        ));
-                }
-            }
-            else
-            {
-                Part updatedPart;
-                if (InHouseRadio.Checked)
-                {
-                    updatedPart = new Inhouse(
-                         Convert.ToInt32(IDInput.Text),
-                         NameInput.Text,
-                         Convert.ToDouble(PriceInput.Text),
-                         Convert.ToInt32(CountInput.Text),
-                         Convert.ToInt32(MinCountInput.Text),
-                         Convert.ToInt32(MaxCountInput.Text),
-                         Convert.ToInt32(SourceIDInput.Text)
-                         );
-                } else
-                {
-                    updatedPart = new Outsourced(
-                         Convert.ToInt32(IDInput.Text),
-                         NameInput.Text,
-                         Convert.ToDouble(PriceInput.Text),
-                         Convert.ToInt32(CountInput.Text),
-                         Convert.ToInt32(MinCountInput.Text),
-                         Convert.ToInt32(MaxCountInput.Text),
-                         SourceIDInput.Text
-                         );
-                }
-                
-                Inventory.UpdatePart(Convert.ToInt32(IDInput.Text), updatedPart);
-            }
-            this.Hide();
+            return;
         }
 
         private void OutsourcedRadio_CheckedChanged(object sender, EventArgs e)

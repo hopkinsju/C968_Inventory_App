@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace C968_Inventory_App
 {
-    public class Product : INotifyPropertyChanged
+    public class Product
     {
-        private ArrayList associatedParts;
+        public ArrayList associatedParts;
         private int productID;
         public int ProductID
         {
@@ -22,7 +22,6 @@ namespace C968_Inventory_App
             set
             {
                 productID = value;
-                NotifyPropertyChanged();
             }
         }
         private string name;
@@ -92,19 +91,9 @@ namespace C968_Inventory_App
             this.max = max;
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        // This method is called by the Set accessor of each property.  
-        // The CallerMemberName attribute that is applied to the optional propertyName  
-        // parameter causes the property name of the caller to be substituted as an argument.  
-        protected void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
         public void SetName(string name)
         {
             this.name = name;
-            NotifyPropertyChanged();
         }
         public string GetName()
         {
@@ -113,7 +102,6 @@ namespace C968_Inventory_App
         public void SetPrice(double price)
         {
             this.price = price;
-            NotifyPropertyChanged();
         }
         public double GetPrice()
         {
@@ -122,7 +110,6 @@ namespace C968_Inventory_App
         public void SetInStock(int inStock)
         {
             this.inStock = inStock;
-            NotifyPropertyChanged();
         }
         public int GetInStock()
         {
@@ -131,7 +118,6 @@ namespace C968_Inventory_App
         public void SetMin(int min)
         {
             this.min = min;
-            NotifyPropertyChanged();
         }
         public int GetMin()
         {
@@ -140,7 +126,6 @@ namespace C968_Inventory_App
         public void SetMax(int max)
         {
             this.max = max;
-            NotifyPropertyChanged();
         }
         public int GetMax()
         {
@@ -149,7 +134,6 @@ namespace C968_Inventory_App
         public void SetProductID(int productID)
         {
             this.productID = productID;
-            NotifyPropertyChanged();
         }
         public int GetProductID()
         {
@@ -158,14 +142,12 @@ namespace C968_Inventory_App
         public void AddAssociatedPart(Part part)
         {
             associatedParts.Add(part);
-            NotifyPropertyChanged();
         }
         public bool RemoveAssociatedPart(int partID)
         {
             try
             {
                 associatedParts.Remove(LookupAssociatedPart(partID));
-                NotifyPropertyChanged();
                 return true;
             }
             catch (Exception)
