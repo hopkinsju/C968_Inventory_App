@@ -204,9 +204,11 @@
             this.ProductsDataGrid.AllowUserToDeleteRows = false;
             this.ProductsDataGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.ProductsDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ProductsDataGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.ProductsDataGrid.Location = new System.Drawing.Point(18, 106);
             this.ProductsDataGrid.MultiSelect = false;
             this.ProductsDataGrid.Name = "ProductsDataGrid";
+            this.ProductsDataGrid.ReadOnly = true;
             this.ProductsDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.ProductsDataGrid.ShowEditingIcon = false;
             this.ProductsDataGrid.Size = new System.Drawing.Size(534, 262);
