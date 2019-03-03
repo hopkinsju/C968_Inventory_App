@@ -71,6 +71,7 @@ namespace C968_Inventory_App
             BindingList<Part> partsBindingList = new BindingList<Part>(Inventory.AllParts);
             this.partsBindingSource.DataSource = partsBindingList;
             this.PartsDataGrid.DataSource = this.partsBindingSource;
+            
 
             PartsDataGrid.Columns["Price"].DefaultCellStyle.Format = "c";
             PartsDataGrid.Columns["Price"].HeaderText = "Price/Cost Per Unit";
@@ -94,32 +95,36 @@ namespace C968_Inventory_App
         //private DataGridViewRow selectedRow;
         private void ModifyPartButton_Click(object sender, EventArgs e)
         {
-            DataGridViewRow selectedRow = PartsDataGrid.SelectedRows[0];
-            var idVal = selectedRow.Cells["PartID"].Value;
             try
             {
+                DataGridViewRow selectedRow = PartsDataGrid.SelectedRows[0];
+                var idVal = selectedRow.Cells["PartID"].Value;
+
                 if (idVal.Equals(null))
                 {
                     throw new NullReferenceException("Selected row contains null value for partID");
                 }
+                int partID = Convert.ToInt32(selectedRow.Cells["PartID"].Value);
+                Part part = Inventory.LookupPart(partID);
+
+                ItemDetailForm partForm = new ItemDetailForm(part)
+                {
+                    MdiParent = this.MdiParent
+                };
+                partForm.Show();
             }
             catch (NullReferenceException)
             {
                 MessageBox.Show("Selected row contains null value for partID");
                 return;
             }
+            catch (ArgumentOutOfRangeException)
+            {
+                MessageBox.Show("No parts exist to modify.");
+            }
                 
             
-            int partID = Convert.ToInt32(selectedRow.Cells["PartID"].Value);
-            MessageBox.Show($"Looking up part using ID: {partID}");
-            Part part = Inventory.LookupPart(partID);
-            MessageBox.Show($"Found Part with ID {part.GetPartId()}");
-
-            ItemDetailForm partForm = new ItemDetailForm(part)
-            {
-                MdiParent = this.MdiParent
-            };
-            partForm.Show(); 
+            
         }
 
         private void ModifyProductButton_Click(object sender, EventArgs e)
@@ -152,6 +157,28 @@ namespace C968_Inventory_App
                 message.AppendLine($"{part.GetName()}");
             }
             MessageBox.Show(message.ToString());
+        }
+
+        private void DeletePartButton_Click(object sender, EventArgs e)
+        {
+            DataGridViewRow selectedRow = PartsDataGrid.SelectedRows[0];
+            int partID = Convert.ToInt32(selectedRow.Cells["PartID"].Value);
+            Part partToDelete = Inventory.LookupPart(partID);
+            Inventory.Deletepart(partToDelete);
+            RefreshDataGridViews();
+        }
+
+        private void RefreshDataGridViews()
+        {
+            partsBindingSource.ResetBindings(true);
+            ModifyPartButton.Enabled = Inventory.AllParts.Count().Equals(0) ? false : true;
+            productsBindingSource.ResetBindings(true);
+            ModifyProductButton.Enabled = Inventory.Products.Count().Equals(0) ? false : true;
+        }
+
+        private void MainScreenForm_Activated(object sender, EventArgs e)
+        {
+            RefreshDataGridViews();
         }
     }
 }

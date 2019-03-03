@@ -47,7 +47,6 @@
             this.inStockDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.priceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pageLabel1 = new C968_Inventory_App.CustomControls.PageLabel();
-            this.DebugParts = new System.Windows.Forms.Button();
             this.PartsGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PartsDataGrid)).BeginInit();
             this.ProductsGroupBox.SuspendLayout();
@@ -66,7 +65,6 @@
             // 
             // PartsGroupBox
             // 
-            this.PartsGroupBox.Controls.Add(this.DebugParts);
             this.PartsGroupBox.Controls.Add(this.AddPartButton);
             this.PartsGroupBox.Controls.Add(this.ModifyPartButton);
             this.PartsGroupBox.Controls.Add(this.DeletePartButton);
@@ -112,6 +110,7 @@
             this.DeletePartButton.TabIndex = 7;
             this.DeletePartButton.Text = "Remove";
             this.DeletePartButton.UseVisualStyleBackColor = true;
+            this.DeletePartButton.Click += new System.EventHandler(this.DeletePartButton_Click);
             // 
             // PartsDataGrid
             // 
@@ -257,16 +256,6 @@
             this.pageLabel1.TabIndex = 0;
             this.pageLabel1.Text = "Inventory Management System";
             // 
-            // DebugParts
-            // 
-            this.DebugParts.Location = new System.Drawing.Point(47, 391);
-            this.DebugParts.Name = "DebugParts";
-            this.DebugParts.Size = new System.Drawing.Size(83, 31);
-            this.DebugParts.TabIndex = 8;
-            this.DebugParts.Text = "Debug";
-            this.DebugParts.UseVisualStyleBackColor = true;
-            this.DebugParts.Click += new System.EventHandler(this.DebugParts_Click);
-            // 
             // MainScreenForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -285,7 +274,7 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "MainScreen";
-            this.Activated += new System.EventHandler(this.MainScreenForm_Load);
+            this.Activated += new System.EventHandler(this.MainScreenForm_Activated);
             this.Load += new System.EventHandler(this.MainScreenForm_Load);
             this.PartsGroupBox.ResumeLayout(false);
             this.PartsGroupBox.PerformLayout();
@@ -319,6 +308,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn inStockDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn priceDataGridViewTextBoxColumn;
-        private System.Windows.Forms.Button DebugParts;
     }
 }

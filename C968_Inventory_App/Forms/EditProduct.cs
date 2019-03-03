@@ -17,6 +17,7 @@ namespace C968_Inventory_App
             InitializeComponent();
             EditPageLabel.Text = "Modify Product";
             PrepForm();
+            SaveButton = new Button();
             this.product = product;
         }
 
