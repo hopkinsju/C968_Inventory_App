@@ -141,11 +141,19 @@ namespace C968_Inventory_App
 
         private void DeletePartButton_Click(object sender, EventArgs e)
         {
-            DataGridViewRow selectedRow = associatedPartsDataGrid.SelectedRows[0];
-            int partID = Convert.ToInt32(selectedRow.Cells["PartID"].Value);
-            Part partToDelete = Inventory.LookupPart(partID);
-            associatedPartsBindingList.Remove(partToDelete);
-            RefreshButtonStates();
+            try
+            {
+                DataGridViewRow selectedRow = associatedPartsDataGrid.SelectedRows[0];
+                int partID = Convert.ToInt32(selectedRow.Cells["PartID"].Value);
+                Part partToDelete = Inventory.LookupPart(partID);
+                associatedPartsBindingList.Remove(partToDelete);
+                RefreshButtonStates();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("No parts are selected.");
+            }
+
         }
 
         private void RefreshButtonStates()
