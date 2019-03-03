@@ -236,5 +236,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.Button DeletePartButton;
+        private new System.Windows.Forms.Button SaveButton;
     }
 }

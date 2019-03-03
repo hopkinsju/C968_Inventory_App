@@ -9,85 +9,24 @@ using System.Threading.Tasks;
 
 namespace C968_Inventory_App
 {
-    public class Inventory : INotifyPropertyChanged
+    public class Inventory
     {
-        private List<Product> products;
-        public List<Product> Products
-        {
-            get {
-                return products;
-            }
-            set {
-                products = value;
-                NotifyPropertyChanged();
-            }
-        }
+        public static List<Product> Products = new List<Product>();
+        public static List<Part> AllParts = new List<Part>();
 
-        private List<Part> allParts;
-        public List<Part> AllParts
-        {
-            get {
-                return allParts;
-            }
-            set {
-                allParts = value;
-                NotifyPropertyChanged();
-            }
-        }
+        public static int nextPartID;
+        public static int nextProductID;
 
-        private int nextPartID;
-        public int NextPartID {
-            get
-            {
-                return nextPartID;
-            }
-            set {
-                nextPartID = value;
-                NotifyPropertyChanged();
-            }
-            
-        }
-        private int nextProductID;
-        public int NextProductID {
-            get
-            {
-                return nextProductID;
-            }
-            set
-            {
-                nextProductID = value;
-                NotifyPropertyChanged();
-            }
-        }
-
-        public Inventory()
-        {
-            nextPartID = 0;
-            nextProductID = 0;
-            products = new List<Product>();
-            allParts = new List<Part>();
-
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        // This method is called by the Set accessor of each property.  
-        // The CallerMemberName attribute that is applied to the optional propertyName  
-        // parameter causes the property name of the caller to be substituted as an argument.  
-        protected void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        public void AddProduct(Product product)
+        public static void AddProduct(Product product)
         {   
-            products.Add(product);
-            ++NextProductID;
+            Products.Add(product);
+            ++nextProductID;
         }
-        public bool RemoveProduct(int productID)
+        public static bool RemoveProduct(int productID)
         {
             try
             {
-                products.Remove(LookupProduct(productID));
+                Products.Remove(LookupProduct(productID));
                 return true;
             }
             catch (Exception)
@@ -95,9 +34,9 @@ namespace C968_Inventory_App
                 return false;
             }
         }
-        public Product LookupProduct(int productID)
+        public static Product LookupProduct(int productID)
         {
-            foreach (Product product in products)
+            foreach (Product product in Products)
             {
                 if (product.GetProductID() == productID)
                 {
@@ -106,21 +45,21 @@ namespace C968_Inventory_App
             }
             return null;
         }
-        public void UpdateProduct(int productID, Product replacement)
+        public static void UpdateProduct(int productID, Product replacement)
         {
-            Product product = products.Find(x => x.GetProductID().Equals(productID));
+            Product product = Products.Find(x => x.GetProductID().Equals(productID));
             product = replacement;
         }
-        public void AddPart(Part part)
+        public static void AddPart(Part part)
         {
-            allParts.Add(part);
-            ++NextPartID;
+            AllParts.Add(part);
+            ++nextPartID;
         }
-        public bool Deletepart(Part part)
+        public static bool Deletepart(Part part)
         {
             try
             {
-                allParts.Remove(LookupPart(part.GetPartId()));
+                AllParts.Remove(LookupPart(part.GetPartId()));
                 return true;
             }
             catch (Exception)
@@ -128,9 +67,9 @@ namespace C968_Inventory_App
                 return false;
             }
         }
-        public Part LookupPart(int partID)
+        public static Part LookupPart(int partID)
         {
-            foreach (Part part in allParts)
+            foreach (Part part in AllParts)
             {
                 if (part.GetPartId() == partID)
                 {
@@ -139,9 +78,19 @@ namespace C968_Inventory_App
             }
             return null;
         }
-        public void UpdatePart(int partID, Part replacement)
+        public static void UpdatePart(int partID, Part replacement)
         {
-            Part part = allParts.Find(x => x.GetPartId().Equals(partID));
-            part = replacement;
+            System.Windows.Forms.MessageBox.Show("Updating Part");
+            Part oldPart = AllParts.Where(i => i.PartID == partID).First();
+            var index = AllParts.IndexOf(oldPart);
+
+            if (index != -1)
+                AllParts[index] = replacement;
+            //NotifyPropertyChanged();
+            //Part oldPart = LookupPart(partID);
+            //System.Windows.Forms.MessageBox.Show($"oldPart name: {oldPart.GetName()}\nreplacement name: {replacement.GetName()}");
+            oldPart = replacement;
+            //System.Windows.Forms.MessageBox.Show($"oldPart name: {oldPart.GetName()}");
+
         }    }
 }

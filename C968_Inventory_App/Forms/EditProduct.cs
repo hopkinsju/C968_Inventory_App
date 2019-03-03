@@ -12,18 +12,18 @@ namespace C968_Inventory_App
 {
     public partial class EditProduct : ItemDetailForm
     {
-        public EditProduct(Inventory inv, Product product)
-            : base(inv, product)
+        public EditProduct(Product product)
         {
             InitializeComponent();
             EditPageLabel.Text = "Modify Product";
             PrepForm();
+            this.product = product;
         }
-        public EditProduct(Inventory inv)
-            : base(inv)
+
+        public EditProduct()
         {
             InitializeComponent();
-            EditPageLabel.Text = "Add Product";
+            EditPageLabel.Text = "New Product";
             PrepForm();
         }
 
@@ -33,6 +33,24 @@ namespace C968_Inventory_App
             SourceLabel.Hide();
             InHouseRadio.Hide();
             OutsourcedRadio.Hide();
+        }
+
+        private void 
+            SaveButton_Click(object sender, EventArgs e)
+        {
+            if (isNew)
+            {
+                Product newProduct = new Product(
+                    Inventory.nextProductID, 
+                    NameInput.Text, 
+                    Convert.ToDouble(PriceInput.Text), 
+                    Convert.ToInt32(CountInput.Text),
+                    Convert.ToInt32(MinCountInput),
+                    Convert.ToInt32(MaxCountInput)
+                    );
+                Inventory.AddProduct(newProduct);
+                this.Hide();
+            }
         }
     }
 }

@@ -264,6 +264,7 @@
             this.OutsourcedRadio.TabStop = true;
             this.OutsourcedRadio.Text = "Outsourced";
             this.OutsourcedRadio.UseVisualStyleBackColor = true;
+            this.OutsourcedRadio.CheckedChanged += new System.EventHandler(this.OutsourcedRadio_CheckedChanged);
             // 
             // InHouseRadio
             // 
@@ -318,25 +319,25 @@
         #endregion
 
         protected CustomControls.PageLabel EditPageLabel;
-        private System.Windows.Forms.TableLayoutPanel LayoutPanel;
-        private System.Windows.Forms.Label MinCountLabel;
-        private System.Windows.Forms.Label IDLabel;
-        private System.Windows.Forms.Label NameLabel;
-        private System.Windows.Forms.Label InvCountLabel;
-        private System.Windows.Forms.Label PriceLable;
-        private System.Windows.Forms.Label MaxCountLabel;
-        private System.Windows.Forms.TextBox IDInput;
-        private System.Windows.Forms.TextBox NameInput;
-        private System.Windows.Forms.TextBox CountInput;
-        private System.Windows.Forms.TextBox PriceInput;
-        private System.Windows.Forms.TextBox MinCountInput;
-        private System.Windows.Forms.TextBox MaxCountInput;
+        protected System.Windows.Forms.TableLayoutPanel LayoutPanel;
+        protected System.Windows.Forms.Label MinCountLabel;
+        protected System.Windows.Forms.Label IDLabel;
+        protected System.Windows.Forms.Label NameLabel;
+        protected System.Windows.Forms.Label InvCountLabel;
+        protected System.Windows.Forms.Label PriceLable;
+        protected System.Windows.Forms.Label MaxCountLabel;
+        protected System.Windows.Forms.TextBox IDInput;
+        protected System.Windows.Forms.TextBox NameInput;
+        protected System.Windows.Forms.TextBox CountInput;
+        protected System.Windows.Forms.TextBox PriceInput;
+        protected System.Windows.Forms.TextBox MinCountInput;
+        protected System.Windows.Forms.TextBox MaxCountInput;
         protected System.Windows.Forms.TextBox SourceIDInput;
         protected System.Windows.Forms.Label SourceLabel;
-        private System.Windows.Forms.Button SaveButton;
         private System.Windows.Forms.Button FormCancelButton;
         private System.Windows.Forms.Panel panel1;
         protected System.Windows.Forms.RadioButton OutsourcedRadio;
         protected System.Windows.Forms.RadioButton InHouseRadio;
+        protected internal System.Windows.Forms.Button SaveButton;
     }
 }

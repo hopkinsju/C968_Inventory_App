@@ -15,11 +15,22 @@ namespace C968_Inventory_App
         // This BindingSource binds the list to the DataGridView control.  
         private BindingSource partsBindingSource = new BindingSource();
         private BindingSource productsBindingSource = new BindingSource();
-        public static Inventory inv = new Inventory();
+        //public static Inventory inv = new Inventory();
 
         public MainScreenForm()
         {
             InitializeComponent();
+            CreateDummyData();
+        }
+
+        private void CreateDummyData()
+        {
+            // Dummy Data
+            Inventory.AddPart(new Inhouse(Inventory.nextPartID, "part 1", 10.00, 2, 0, 100, 1));
+            Inventory.AddPart(new Inhouse(Inventory.nextPartID, "part 2", 11.55, 40, 3, 300, 2));
+            Inventory.AddPart(new Outsourced(Inventory.nextPartID, "part 3", 12.10, 3, 0, 100, "Acme Co."));
+            Inventory.AddProduct(new Product(Inventory.nextProductID, "product 1", 45.00, 15, 1, 25));
+            Inventory.AddProduct(new Product(Inventory.nextProductID, "product 2", 45.00, 15, 1, 25));
         }
 
         private void ExitButton_Click(object sender, EventArgs e)
@@ -29,16 +40,17 @@ namespace C968_Inventory_App
 
         private void AddPartButton_Click(object sender, EventArgs e)
         {
-            ItemDetailForm partForm = new ItemDetailForm(inv)
+            ItemDetailForm partForm = new ItemDetailForm()
             {
                 MdiParent = this.MdiParent
             };
+
             partForm.Show();
         }
 
         private void AddProductButton_Click(object sender, EventArgs e)
         {
-            EditProduct productForm = new EditProduct(inv)
+            EditProduct productForm = new EditProduct()
             {
                 MdiParent = this.MdiParent
             };
@@ -53,17 +65,13 @@ namespace C968_Inventory_App
         private void MainScreenForm_Load(object sender, EventArgs e)
         {
 
-            // Dummy Data
-            inv.AddPart(new Inhouse(inv.NextPartID, "part 1", 10.00, 2, 0, 100, 1));
-            inv.AddPart(new Inhouse(inv.NextPartID, "part 2", 11.55, 40, 3, 300, 2));
-            inv.AddPart(new Outsourced(inv.NextPartID, "part 3", 12.10, 3, 0, 100, "Acme Co."));
-            inv.AddProduct(new Product(inv.NextProductID, "product 1", 45.00, 15, 1, 25));
-            inv.AddProduct(new Product(inv.NextProductID, "product 2", 45.00, 15, 1, 25));
+
 
             // Bind dataview to AllParts list
-            BindingList<Part> partsBindingList = new BindingList<Part>(inv.AllParts);
+            BindingList<Part> partsBindingList = new BindingList<Part>(Inventory.AllParts);
             this.partsBindingSource.DataSource = partsBindingList;
             this.PartsDataGrid.DataSource = this.partsBindingSource;
+
             PartsDataGrid.Columns["Price"].DefaultCellStyle.Format = "c";
             PartsDataGrid.Columns["Price"].HeaderText = "Price/Cost Per Unit";
             PartsDataGrid.Columns["CompanyName"].Visible = false;
@@ -73,20 +81,41 @@ namespace C968_Inventory_App
 
 
             // Bind dataview to Product list
-            BindingList<Product> productsBindingList = new BindingList<Product>(inv.Products);
+            BindingList<Product> productsBindingList = new BindingList<Product>(Inventory.Products);
             this.productsBindingSource.DataSource = productsBindingList;
             this.ProductsDataGrid.DataSource = this.productsBindingSource;
+
+            ProductsDataGrid.Columns["Price"].DefaultCellStyle.Format = "c";
+            ProductsDataGrid.Columns["Price"].HeaderText = "Price/Cost Per Unit";
+            ProductsDataGrid.Columns["Min"].Visible = false;
+            ProductsDataGrid.Columns["Max"].Visible = false;
         }
 
         //private DataGridViewRow selectedRow;
         private void ModifyPartButton_Click(object sender, EventArgs e)
         {
             DataGridViewRow selectedRow = PartsDataGrid.SelectedRows[0];
-
+            var idVal = selectedRow.Cells["PartID"].Value;
+            try
+            {
+                if (idVal.Equals(null))
+                {
+                    throw new NullReferenceException("Selected row contains null value for partID");
+                }
+            }
+            catch (NullReferenceException)
+            {
+                MessageBox.Show("Selected row contains null value for partID");
+                return;
+            }
+                
+            
             int partID = Convert.ToInt32(selectedRow.Cells["PartID"].Value);
-            Part part = inv.LookupPart(partID);
+            MessageBox.Show($"Looking up part using ID: {partID}");
+            Part part = Inventory.LookupPart(partID);
+            MessageBox.Show($"Found Part with ID {part.GetPartId()}");
 
-            ItemDetailForm partForm = new ItemDetailForm(inv, part)
+            ItemDetailForm partForm = new ItemDetailForm(part)
             {
                 MdiParent = this.MdiParent
             };
@@ -98,13 +127,31 @@ namespace C968_Inventory_App
             DataGridViewRow selectedRow = ProductsDataGrid.SelectedRows[0];
 
             int productID = Convert.ToInt32(selectedRow.Cells["ProductID"].Value);
-            Product product = inv.LookupProduct(productID);
+            Product product = Inventory.LookupProduct(productID);
 
-            EditProduct productForm = new EditProduct(inv, product)
+            EditProduct productForm = new EditProduct(product)
             {
                 MdiParent = this.MdiParent
             };
             productForm.Show();
+        }
+
+        private void MainScreenForm_Refresh(object sender, EventArgs e)
+        {
+            PartsDataGrid.Invalidate();
+            ProductsDataGrid.Invalidate();
+            productsBindingSource.ResetBindings(true);
+            partsBindingSource.ResetBindings(true);
+        }
+
+        private void DebugParts_Click(object sender, EventArgs e)
+        {
+            StringBuilder message = new StringBuilder(); 
+            foreach (Part part in Inventory.AllParts)
+            {
+                message.AppendLine($"{part.GetName()}");
+            }
+            MessageBox.Show(message.ToString());
         }
     }
 }
