@@ -13,27 +13,31 @@ namespace C968_Inventory_App
         {
             get
             {
-                return machineID;
+                return GetMachineID();
             }
             set
             {
                 SetMachineID(value);
             }
         }
-        public override string CompanyName { set; get; }
 
         public Inhouse() {}
+        public Inhouse(string name, double price, int inStock, int min, int max, int machineID)
+            : base(name, price, inStock, min, max)
+        {   
+            MachineID = machineID;
+        }
         public Inhouse(int partID, string name, double price, int inStock, int min, int max, int machineID)
             : base(partID, name, price, inStock, min, max)
         {
-            this.machineID = machineID;
+            MachineID = machineID;
         }
 
         public void SetMachineID(int machineID)
         {
             this.machineID = machineID;
         }
-        public int GetMachineID()
+        public override int GetMachineID()
         {
             return machineID;
         }

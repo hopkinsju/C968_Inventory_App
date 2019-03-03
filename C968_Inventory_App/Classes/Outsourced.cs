@@ -15,26 +15,30 @@ namespace C968_Inventory_App
         {
             get
             {
-                return companyName;
+                return GetCompanyName();
             }
             set
             {
                 SetCompanyName(value);
             }
         }
-        public override int MachineID { set; get; }
 
+        public Outsourced(string name, double price, int inStock, int min, int max, string companyName)
+            : base(name, price, inStock, min, max)
+        {
+            CompanyName = companyName;
+        }
         public Outsourced(int partID, string name, double price, int inStock, int min, int max, string companyName)
             : base(partID, name, price, inStock, min, max)
         {
-            this.companyName = companyName;
+            CompanyName = companyName;
         }
 
         public void SetCompanyName(string companyName)
         {
             this.companyName = companyName;
         }
-        public string GetCompanyName()
+        public override string GetCompanyName()
         {
             return companyName;
         }

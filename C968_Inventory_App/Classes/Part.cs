@@ -72,10 +72,13 @@ namespace C968_Inventory_App
                 SetMax(value);
             }
         }
-        public abstract int MachineID { get; set; }
-        public abstract string CompanyName { get; set; }
+        public virtual int MachineID { get; set; }
+        public virtual string CompanyName { get; set; }
 
         public Part() {}
+        public Part(string name, double price, int inStock, int min, int max)
+            :this(Inventory.GetNextPartID(), name, price, inStock, min, max) { }
+
         public Part(int partID, string name, double price, int inStock, int min, int max)
         {
             PartID = partID;
@@ -142,5 +145,7 @@ namespace C968_Inventory_App
         {
             return partID;
         }
+        public virtual int GetMachineID() { return 0; }
+        public virtual string GetCompanyName() { return ""; }
     }
 }

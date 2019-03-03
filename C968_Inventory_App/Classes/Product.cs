@@ -21,7 +21,7 @@ namespace C968_Inventory_App
             }
             set
             {
-                productID = value;
+                SetProductID(value);
             }
         }
         private string name;
@@ -79,6 +79,9 @@ namespace C968_Inventory_App
                 SetMax(value);
             }
         }
+
+        public Product(string name, double price, int inStock, int min, int  max)
+            : this(Inventory.GetNextProductID(), name, price, inStock, min, max) { }
 
         public Product(int productID, string name, double price, int inStock, int min, int max)
         {

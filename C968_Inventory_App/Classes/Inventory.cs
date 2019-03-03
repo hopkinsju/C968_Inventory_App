@@ -14,13 +14,20 @@ namespace C968_Inventory_App
         public static List<Product> Products = new List<Product>();
         public static List<Part> AllParts = new List<Part>();
 
-        public static int nextPartID;
-        public static int nextProductID;
+        private static int nextPartID = 0;
+        private static int nextProductID = 0;
 
+        public static int GetNextPartID()
+        {
+            return nextPartID++;
+        }
+        public static int GetNextProductID()
+        {
+            return nextProductID++;
+        }
         public static void AddProduct(Product product)
         {   
             Products.Add(product);
-            ++nextProductID;
         }
         public static bool RemoveProduct(int productID)
         {
@@ -58,7 +65,6 @@ namespace C968_Inventory_App
         public static void AddPart(Part part)
         {
             AllParts.Add(part);
-            ++nextPartID;
         }
         public static bool Deletepart(Part part)
         {

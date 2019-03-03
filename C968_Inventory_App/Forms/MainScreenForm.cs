@@ -28,14 +28,14 @@ namespace C968_Inventory_App
         private void CreateDummyData()
         {
             // Dummy Data
-            Inventory.AddPart(new Inhouse(Inventory.nextPartID, "part 1", 10.00, 2, 0, 100, 1));
-            Inventory.AddPart(new Inhouse(Inventory.nextPartID, "part 2", 11.55, 40, 3, 300, 2));
-            Inventory.AddPart(new Outsourced(Inventory.nextPartID, "part 3", 12.10, 3, 0, 100, "Acme Co."));
-            Inventory.AddProduct(new Product(Inventory.nextProductID, "product 1", 45.00, 15, 1, 25));
-            Inventory.AddProduct(new Product(Inventory.nextProductID, "product 2", 45.00, 15, 1, 25));
-            Inventory.AddProduct(new Product(Inventory.nextProductID, "product 3", 45.00, 15, 1, 25));
+            Inventory.AddPart(new Inhouse("part 1", 10.00, 2, 0, 100, 1));
+            Inventory.AddPart(new Inhouse("part 2", 11.55, 40, 3, 300, 2));
+            Inventory.AddPart(new Outsourced("part 3", 12.10, 3, 0, 100, "Acme Co."));
+            Inventory.AddProduct(new Product("product 1", 45.00, 15, 1, 25));
+            Inventory.AddProduct(new Product("product 2", 45.00, 15, 1, 25));
+            Inventory.AddProduct(new Product("product 3", 45.00, 15, 1, 25));
             Product p1 = Inventory.LookupProduct(0);
-            Product p2 = Inventory.LookupProduct(1);
+            Product p2 = Inventory.LookupProduct(2);
             p1.AddAssociatedPart(Inventory.LookupPart(0));
             p1.AddAssociatedPart(Inventory.LookupPart(1));
             p1.AddAssociatedPart(Inventory.LookupPart(2));
